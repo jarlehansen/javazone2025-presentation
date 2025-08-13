@@ -1,0 +1,9 @@
+{
+  "name": "javazone-2025",
+  "version": "1.0.0",
+  "description": "MCP presentation for JavaZone 2025",
+  "author": "Jarle Hansen",
+  "scripts": {
+    "start": "marp mcp.md -o presentation.html"
+  }
+}
