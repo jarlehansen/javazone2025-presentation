@@ -1,9 +1,12 @@
 {
-  "name": "javazone-2025",
+  "name": "javazone2025-presentation",
   "version": "1.0.0",
   "description": "MCP presentation for JavaZone 2025",
   "author": "Jarle Hansen",
   "scripts": {
     "start": "marp mcp.md -o presentation.html"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3"
   }
 }
