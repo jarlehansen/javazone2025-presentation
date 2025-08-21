@@ -11,9 +11,39 @@ style: |
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
+    animation: slideIn 0.5s ease-out;
   }
   
-  /* Enhanced heading animations - ONLY h1 animates */
+  @keyframes slideIn {
+    from {
+      transform: translateX(15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  section:has(h1) {
+    animation: heroSlideIn 0.5s ease-out;
+  }
+  
+  @keyframes heroSlideIn {
+    from {
+      transform: translateX(20px) scale(0.98);
+      opacity: 0;
+    }
+    60% {
+      transform: translateX(5px) scale(1.01);
+      opacity: 0.8;
+    }
+    to {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
   h1 {
     font-size: 50px;
     color: #00d4ff;
@@ -48,19 +78,15 @@ style: |
     to { transform: scaleX(1); }
   }
   
-  /* Remove animations from all other content */
   h2 {
     font-size: 38px;
     color: #ffffff;
-    /* No animation */
   }
   
-  /* Code block transitions - remove animation */
   pre {
     margin: 0.5em auto;
     border-left: 3px solid #00d4ff;
     padding-left: 1rem;
-    /* No animation */
   }
   
   code {
@@ -76,38 +102,12 @@ style: |
     transform: scale(1.05);
   }
   
-  /* Remove animations from lists and content */
-  ul li, ol li {
-    /* No animation - instant display */
-  }
-  
-  /* Remove column animations */
   .columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
   
-  .columns > div:first-child {
-    /* No animation */
-  }
-  
-  .columns > div:last-child {
-    /* No animation */
-  }
-  
-  /* Special effects for emojis */
-  section:contains("📋"), section:contains("😰"), section:contains("📈"), 
-  section:contains("🎉"), section:contains("📊"), section:contains("🔧"),
-  section:contains("🏗️"), section:contains("🌱"), section:contains("🚀"),
-  section:contains("📦"), section:contains("🔨"), section:contains("📚"),
-  section:contains("🤖"), section:contains("🎯"), section:contains("🏭"),
-  section:contains("✅"), section:contains("🗺️"), section:contains("📚"),
-  section:contains("🙏") {
-    --emoji-bounce: bounce 2s infinite;
-  }
-  
-  /* Floating particles for visual interest */
   section::after {
     content: '✨';
     position: absolute;
@@ -138,44 +138,9 @@ style: |
     }
   }
   
-  /* Special styling for specific slide types */
-  section[data-paginate="false"] {
-    animation: heroSlide 0.6s ease-out;
-  }
-  
-  @keyframes heroSlide {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
-  /* Footer - keep visible always, no animation */
   footer {
     color: #666;
     font-size: 18px;
-    /* No animation - always visible */
-  }
-  
-  /* Interactive hover effects */
-  section:hover::before {
-    opacity: 0.8;
-    transition: opacity 0.5s ease;
-  }
-  
-  section:hover h1 {
-    transform: scale(1.02);
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-    transition: all 0.3s ease;
-  }
-  
-  /* Remove general content animations */
-  p, div, span {
-    /* No animation - instant display */
   }
   
   ul {
