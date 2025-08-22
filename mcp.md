@@ -3,7 +3,7 @@ marp: true
 theme: uncover
 class: invert
 paginate: false
-footer: 'JavaZone 2025 | Jarle Hansen'
+footer: 'Jarle Hansen | Systek'
 transition: fade
 style: |
   section {
@@ -146,6 +146,16 @@ style: |
   ul {
     text-align: left;
   }
+  
+  img {
+    max-width: 100%;
+    max-height: 50vh;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
 ---
 
 <!-- _paginate: false -->
@@ -167,66 +177,34 @@ style: |
 
 # **Agenda** 📋
 
-- ✨ **Hva er MCP** - Og hvorfor er det nyttig
-- 🚀 **Hvordan fungerer det** 
-- 🔧 **Live Demo** - Lage vår egen MCP
+- ✨ **Hva er Model Context Protocol** - Og hvorfor er det nyttig
+- 🚀 **Hvordan fungerer det**
+- 🔧 **Live Demo** - Lage vår egen MCP server
   - Bruk av Spring AI
   - Integreres med Claude desktop
-- ⚡ **Alternativer** - Koog & eksisterende servere
-- 🏭 **Produksjon** - Tips og beste praksis
+- ⚡ **Alternativer** - Hvilke andre teknologier finnes? Standard MCP servere?
+- 🏭 **Best practices** - Hvordan få mest mulig ut av MCP.
+- 🏁 **Oppsummering** - Hva har vi lært?
 
 ---
 
-# **Problemet** 😰
+# ✨ Hva er Model Context Protocol?
 
-<div style="font-size: 24px;">
-
-```
-     AI Modeller                  Datakilder
-   
-   Claude ─────┬─────────┬──────── Database
-               │         │
-   GPT-4 ──────┼─────────┼──────── API-er
-               │         │
-   Gemini ─────┼─────────┼──────── Filer
-               │         │
-   Llama ──────┴─────────┴──────── Slack
-```
-
-</div>
-
-## **= 16 custom integrasjoner! 😱**
-
-Hver med egen auth, error handling, rate limiting...
+- **Lansert november 2024** av Anthropic som en åpen standard
+- **Problemet**: AI-assistenter lever i isolasjon uten tilgang til dine data og verktøy
+- **Løsningen**: Standardisert måte for AI-modeller å kommunisere sikkert med eksterne systemer
+- **Praktisk**: La Claude få tilgang til din kodebase, databaser, eller forretningsdata
+- **Sikkert**: Kontrollert tilgang - du bestemmer hva AI-en kan se og gjøre
 
 ---
 
-# **Hva skjer når vi skalerer?** 📈
+# Model Context Protocol
 
-<div class="columns">
-<div>
-
-### **10 AI-modeller**
-### **× 50 datakilder**
-### **= 500 integrasjoner**
-
-</div>
-<div>
-
-### Hver integrasjon:
-- Egen implementering
-- Egen vedlikehold
-- Egen dokumentasjon
-- Egen testing
-
-</div>
-</div>
-
-## **Dette skalerer ikke!** ⚠️
+![](images/usb-c.jpeg)
 
 ---
 
-# **Løsningen: MCP** 🎉
+# **Model Context Protocol** 🎉
 
 <div style="font-size: 24px;">
 
@@ -279,21 +257,19 @@ Lansert av Anthropic, 25. november 2024
 
 # **Hvordan fungerer MCP?** 🔧
 
-```mermaid
-graph LR
-    A[AI App/Host] -->|MCP Client| B[Transport]
-    B -->|JSON-RPC 2.0| C[MCP Server]
-    C --> D[🗂️ Resources]
-    C --> E[🔨 Tools]  
-    C --> F[💬 Prompts]
-```
+<div class="columns">
+<div>
 
-<div style="font-size: 24px; margin-top: 20px;">
+![](images/mcp-server.png)
 
-**Transport**: STDIO (lokal) eller SSE (remote)
-**Protocol**: JSON-RPC 2.0 over transport
-**Format**: Standardisert request/response
+</div>
+<div style="font-size: 24px; text-align: left;">
 
+- **Transport**: STDIO (lokal) eller SSE (remote)
+- **Protocol**: JSON-RPC 2.0 over transport
+- **Format**: Standardisert request/response
+
+</div>
 </div>
 
 ---
