@@ -147,7 +147,7 @@ style: |
     text-align: left;
   }
   
-  img {
+  img[src] {
     max-width: 100%;
     max-height: 50vh;
     height: auto;
@@ -155,6 +155,17 @@ style: |
     object-fit: contain;
     margin: 0 auto;
     display: block;
+  }
+  
+  .emoji, img[alt*="emoji"], img:not([src]):not([alt]) {
+    display: inline !important;
+    height: 1em !important;
+    width: auto !important;
+    max-height: 1em !important;
+    max-width: none !important;
+    margin: 0 !important;
+    vertical-align: -0.1em !important;
+    object-fit: contain !important;
   }
 ---
 
