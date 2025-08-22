@@ -4,6 +4,7 @@
   "description": "MCP presentation for JavaZone 2025",
   "author": "Jarle Hansen",
   "scripts": {
+    "dev": "marp --watch mcp.md -o presentation.html",
     "start": "marp mcp.md -o presentation.html"
   },
   "devDependencies": {

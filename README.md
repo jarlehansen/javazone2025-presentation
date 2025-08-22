@@ -6,7 +6,19 @@ The presentation is built using [Marp](https://marp.app/), a markdown presentati
 
 ## Getting Started
 
-To generate the presentation HTML file, run:
+### Development Mode
+
+For development with live reload, run:
+
+```bash
+npm run dev
+```
+
+This command will watch the `mcp.md` file for changes and automatically regenerate `presentation.html`.
+
+### Build
+
+To generate the presentation HTML file once, run:
 
 ```bash
 npm start
