@@ -239,30 +239,57 @@ Lansert av Anthropic, 25. november 2024
 
 ---
 
+# **MCP Support Status** 🚀
+
+- 🤖 **Claude** (Anthropic)
+- 🔷 **Copilot** (Microsoft)
+- 💬 **ChatGPT** (OpenAI)
+- 🌈 **Gemini** (Google)
+
+<br>
+
+#### **🎯 MCP er raskt på vei til å bli universell standard**  
+Alle store AI-leverandører implementerer støtte
+
+---
+
 # **MCP Status 2025** 📊
 
-<div class="columns">
-<div>
-
-### **Adoption**
-- ✅ Anthropic (Claude)
-- ✅ OpenAI (mars 2025)
-- ✅ Microsoft 
-- ✅ JetBrains (Koog)
-- 🔄 Google (vurderer)
-
-</div>
-<div>
-
-### **Økosystem**
 - 1000+ MCP servere
 - 10+ frameworks
 - TypeScript, Python, Java, Go, C#
 - Aktiv community
 - Rask vekst
 
+
+---
+
+# **Offisielle MCP-servere** 📚
+
+<div class="columns">
+<div>
+
+### **🗄️ Database**
+PostgreSQL, SQLite, MongoDB
+
+### **🛠️ Dev Tools**
+GitHub, Git, Puppeteer
+
+</div>
+<div>
+
+### **💼 Business**
+Slack, Google Drive, Gmail
+
+### **🌐 Web/API**
+Brave Search, Fetch, Time
+
 </div>
 </div>
+
+<br>
+
+##### **🔗 github.com/modelcontextprotocol/servers**
 
 ---
 
@@ -324,121 +351,53 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 # **La oss bygge!** 🚀
 
-## **Demo: HR-system MCP Server**
+## **Demo: JavaZone 2025 API MCP Server**
 
 <div style="text-align: left; margin: 0 auto; width: 80%;">
 
-**Use case**: AI-assistent for HR
+**Use case**: AI-assistent for JavaZone 2025
 
 **Funksjoner**:
-- Søke etter ansatte
-- Sjekke feriestatus
-- Finne team-medlemmer
-- Hente avdelingsinfo
+- Søke etter foredragsholdere
+- Finne når foredrag holdes
+- Hente programinformasjon
+- Søke etter tema/teknologier
 
-**Stack**: Spring Boot 3.3 + Kotlin + H2
+**Stack**: Spring Boot 3.5 + Kotlin + JavaZone API
 
 </div>
 
 ---
 
-# **Steg 1: Dependencies** 📦
+# **Live Coding Time!** 💻
 
-```xml
-<dependency>
-    <groupId>org.springframework.ai</groupId>
-    <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
-    <version>0.1.0</version>
-</dependency>
-```
+<div style="font-size: 36px; margin: 40px 0;">
 
-```yaml
-spring:
-  ai:
-    mcp:
-      server:
-        type: SYNC
-        transport:
-          sse:
-            path: /mcp/sse
-```
+</div>
+
+<div style="text-align: left; margin: 0 auto; width: 80%;">
+
+**Vi skal bygge sammen 🚀:**
+- Spring Boot applikasjon fra scratch
+- Implementere JavaZone API-integrasjon
+- Legge til MCP server-funksjonalitet  
+- Teste med Claude Desktop
+
+
+</div>
 
 ---
 
-# **Steg 2: Implementer Tool** 🔨
+<div style="text-align: center; margin: 40px 0;">
 
-```kotlin
-@Component
-class HRTools(private val hrService: HRService) {
-    
-    @Tool(description = "Søk etter ansatte")
-    fun searchEmployees(
-        @ToolParam(description = "Søkeord") 
-        query: String
-    ): List<Employee> {
-        return hrService.searchEmployees(query)
-    }
-    
-    @Tool(description = "Hent feriestatus")
-    fun getVacationStatus(
-        @ToolParam(description = "Ansatt-ID") 
-        employeeId: String
-    ): VacationInfo {
-        return hrService.getVacationInfo(employeeId)
-    }
-}
-```
+## 💬 "At this point, I wanted to start building! So, I went to my second favorite place on the internet, the Spring Initializr - [**start.spring.io**](https://start.spring.io)"
 
----
+<br>
 
-# **Steg 3: Resources** 📚
+##### **— Josh Long, Spring Developer Advocate** 🌱
 
-```kotlin
-@Component
-class HRResourceProvider : ResourceProvider {
-    
-    override fun getResources(): List<Resource> {
-        return listOf(
-            Resource(
-                uri = "hr://policies/handbook",
-                name = "Personalhåndbok",
-                description = "HR-policies og regler",
-                mimeType = "text/markdown"
-            )
-        )
-    }
-    
-    override fun readResource(uri: String): ResourceContent {
-        return when(uri) {
-            "hr://policies/handbook" -> loadHandbook()
-            else -> throw ResourceNotFoundException(uri)
-        }
-    }
-}
-```
+</div>
 
----
-
-# **Steg 4: Claude Config** 🤖
-
-```json
-{
-  "mcpServers": {
-    "hr-system": {
-      "command": "java",
-      "args": ["-jar", "hr-mcp-server.jar"],
-      "env": {
-        "SERVER_PORT": "8080"
-      }
-    }
-  }
-}
-```
-
-**Lokasjon:**
-- Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-- Mac: `~/Library/Application Support/Claude/`
-- Linux: `~/.config/Claude/`
 
 ---
 
@@ -454,10 +413,10 @@ class HRResourceProvider : ResourceProvider {
 
 **Spørsmål vi kan stille:**
 
-1. "Hvem jobber i IT-avdelingen?"
-2. "Når har Erik ferie?"
-3. "Finn alle senior developers"
-4. "Vis team-strukturen"
+1. "Hvem holder foredrag om Kotlin på JavaZone?"
+2. "Når er foredraget om Spring Boot?"
+3. "Finn alle foredrag om AI/maskinlæring"
+4. "Vis programmet for onsdag 10. september"
 
 </div>
 
