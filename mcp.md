@@ -438,14 +438,14 @@ var app = builder.Build();
 
 ---
 
-# **IntelliJ IDEA som MCP Server** 💡
+# **IntelliJ som MCP Server** 💡
 
 <div class="columns">
 <div>
 
-💡 **IntelliJ kan også fungere som MCP server**
-
 🔌 **Gi AI tilgang til IDE-funksjonalitet**
+
+📅 **Tilgjengelig fra versjon 2025.2**
 
 </div>
 <div>
@@ -461,6 +461,8 @@ var app = builder.Build();
 <br>
 
 ## **🎯 La oss se en rask demo!**
+
+**📖 Les mer:** [jetbrains.com/help/ai-assistant/mcp.html](https://www.jetbrains.com/help/ai-assistant/mcp.html#use_ide_as_an_mcp_server)
 
 ---
 
