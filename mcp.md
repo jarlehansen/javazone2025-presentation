@@ -233,9 +233,7 @@ style: |
 
 </div>
 
-## **= Én standard protokoll!** ✨
-
-Lansert av Anthropic, 25. november 2024
+## **= Én standard protokoll!**
 
 ---
 
@@ -250,17 +248,6 @@ Lansert av Anthropic, 25. november 2024
 
 #### **🎯 MCP er raskt på vei til å bli universell standard**  
 Alle store AI-leverandører implementerer støtte
-
----
-
-# **MCP Status 2025** 📊
-
-- 1000+ MCP servere
-- 10+ frameworks
-- TypeScript, Python, Java, Go, C#
-- Aktiv community
-- Rask vekst
-
 
 ---
 
@@ -329,6 +316,40 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
+# **Demo: JavaZone MCP Server** 🚀
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+
+🔍 **Søke etter foredragsholdere**
+
+⏰ **Finne når foredrag holdes**  
+
+📋 **Hente programinformasjon**
+
+🏷️ **Søke etter tema/teknologier**
+
+</div>
+
+---
+
+# **Vi skal bygge 🚀**
+
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+
+✅ **Spring Boot applikasjon fra scratch**
+
+✅ **Implementere JavaZone API-integrasjon**
+
+✅ **Legge til MCP server-funksjonalitet**
+
+✅ **Teste med Claude Desktop**
+
+</div>
+
+
+---
+
 # **Spring AI MCP** 🌱
 
 <div style="text-align: left; margin: 0 auto; width: 85%;">
@@ -347,44 +368,6 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 </div>
 
----
-
-# **La oss bygge!** 🚀
-
-## **Demo: JavaZone 2025 API MCP Server**
-
-<div style="text-align: left; margin: 0 auto; width: 80%;">
-
-**Use case**: AI-assistent for JavaZone 2025
-
-**Funksjoner**:
-- Søke etter foredragsholdere
-- Finne når foredrag holdes
-- Hente programinformasjon
-- Søke etter tema/teknologier
-
-**Stack**: Spring Boot 3.5 + Kotlin + JavaZone API
-
-</div>
-
----
-
-# **Live Coding Time!** 💻
-
-<div style="font-size: 36px; margin: 40px 0;">
-
-</div>
-
-<div style="text-align: left; margin: 0 auto; width: 80%;">
-
-**Vi skal bygge sammen 🚀:**
-- Spring Boot applikasjon fra scratch
-- Implementere JavaZone API-integrasjon
-- Legge til MCP server-funksjonalitet  
-- Teste med Claude Desktop
-
-
-</div>
 
 ---
 
@@ -401,86 +384,83 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Demo Time!** 🎯
 
-<div style="font-size: 36px; margin: 40px 0;">
-
-### La oss teste med Claude! 
-
-</div>
-
-<div style="text-align: left; margin: 0 auto; width: 80%;">
-
-**Spørsmål vi kan stille:**
-
-1. "Hvem holder foredrag om Kotlin på JavaZone?"
-2. "Når er foredraget om Spring Boot?"
-3. "Finn alle foredrag om AI/maskinlæring"
-4. "Vis programmet for onsdag 10. september"
-
-</div>
-
----
-
-# **Alternativ: Koog** 🎯
-
-## JetBrains' Kotlin-first AI Framework
-
-```kotlin
-@Agent
-class HRAgent : KoogAgent() {
-    
-    @McpTool("Search employees")
-    suspend fun searchEmployees(query: String): List<Employee> {
-        return withContext(Dispatchers.IO) {
-            database.query(query)
-        }
-    }
-}
-```
-
-✅ Native Kotlin coroutines
-✅ Multiplatform (Android, JVM, JS)
-✅ IntelliJ integration
-
----
-
-# **Eksisterende MCP-servere** 📚
+# **Andre alternativer for MCP-servere** 🎯
 
 <div class="columns">
 <div>
 
-### **Databaser**
-- PostgreSQL
-- MongoDB  
-- SQLite
-- Redis
+### **🟢 Node.js/TypeScript**
+```typescript
+import { Server } from '@modelcontextprotocol/sdk'
 
-### **Dev Tools**
-- GitHub
-- Git
-- Puppeteer
+const server = new Server({
+  name: 'my-server'
+})
+```
+
+### **🔵 Python**
+```python
+from mcp import Server
+
+server = Server("my-server")
+
+@server.tool()
+def search_data(query: str):
+    return results
+```
 
 </div>
 <div>
 
-### **Business**
-- Slack
-- Google Drive
-- Stripe
-- Brave Search
+### **🔷 Go**
+```go
+package main
 
-### **Bruk dem!**
-```yaml
-brave-search:
-  command: npx
-  args: 
-    - "@modelcontextprotocol/
-       server-brave-search"
+import "github.com/modelcontextprotocol/go-sdk"
+
+func main() {
+    server := mcp.NewServer("my-server")
+    server.AddTool("search", searchHandler)
+}
+```
+
+### **🟣 C#/.NET**
+```csharp
+var builder = Host.CreateApplicationBuilder();
+builder.Services.AddMcpServer("my-server");
+
+var app = builder.Build();
 ```
 
 </div>
 </div>
+
+---
+
+# **IntelliJ IDEA som MCP Server** 💡
+
+<div class="columns">
+<div>
+
+💡 **IntelliJ kan også fungere som MCP server**
+
+🔌 **Gi AI tilgang til IDE-funksjonalitet**
+
+</div>
+<div>
+
+- Navigere i kodebasen
+- Kjøre tester
+- Refaktorere kode
+- Analysere kodekvalitet
+
+</div>
+</div>
+
+<br>
+
+## **🎯 La oss se en rask demo!**
 
 ---
 
@@ -546,91 +526,39 @@ fun trackedOp()
 
 # **MCP Roadmap** 🗺️
 
-<div class="columns">
-<div>
+## **MCP Registry** 🚀
 
-### **Levert (2025)**
-✅ OAuth 2.1
-✅ Streaming
-✅ OpenAI adoption
-✅ Spring AI support
-
-</div>
-<div>
-
-### **Kommer**
-🔄 Tool discovery
-🔄 Federated networks
-🔄 Native IDE-støtte
-🔄 Better debugging
-
-</div>
-</div>
+- Under aktiv utvikling
+- **Sentralisert server-discovery og metadata**
+- **API-lag** som tredjepartsmarkedsplasser kan bygge på
+- Forenkler server-distribusjon og oppdagelse
 
 <br>
 
-## **1000+ servere og økende!** 📈
+**📖 Les mer:** [modelcontextprotocol.io/development/roadmap](https://modelcontextprotocol.io/development/roadmap)
 
 ---
 
 # **Oppsummering** 🎯
 
-<div style="font-size: 30px; text-align: left; margin: 0 auto; width: 85%;">
-
-✅ MCP løser N×M integrasjonsproblemet
-
-✅ Spring AI gjør det enkelt for Java/Kotlin
-
-✅ Fra null til fungerende på minutter
-
-✅ Produksjonsklart med Spring Boot
-
-✅ Åpen standard - ingen vendor lock-in
-
-</div>
-
-<br>
-
-## **Start i dag!** 🚀
+- 🌐 **MCP standardiserer AI-integrasjoner** - én protokoll for alle
+- 🚀 **Spring AI + Kotlin** gjør implementering enkel og kjent  
+- 💻 **Demo** viser praktisk verdi på minutter
+- 🔓 **Åpen standard** - ingen vendor lock-in, bred støtte
 
 ---
 
-# **Ressurser** 📚
+# **Takk for meg** 🙏
 
 <div style="text-align: left; margin: 0 auto; width: 85%;">
 
-### **Kode & Docs**
-🔗 `github.com/[user]/javazone-mcp-demo`
+##### **Kode & Docs**
+🔗 `github.com/jarlehansen/javazone-mcp-demo`
 🔗 `modelcontextprotocol.io`
 🔗 `docs.spring.io/spring-ai/mcp`
 
-### **Community**
-💬 MCP Discord Server
-💬 Spring AI Slack Channel
-
-### **Kontakt**
-📧 LinkedIn: [Ditt navn]
-📧 Twitter/X: @[handle]
+##### **Kontakt**
+📧 LinkedIn: Jarle Hansen
+📧 E-post: jarle@jarlehansen.net
 
 </div>
-
----
-
-<!-- _class: lead -->
-<!-- _paginate: false -->
-
-# **Takk!** 🙏
-
-<br>
-
-## Spørsmål?
-
-<br>
-<br>
-
-### *"The best way to predict the future*
-### *is to implement it"*
-
-<br>
-
-**Slides & kode:** `github.com/[user]/javazone-2025-mcp`
