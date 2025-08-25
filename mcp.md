@@ -215,6 +215,15 @@ style: |
 
 ---
 
+# **MCP gir deg** 🎁
+
+- **En voksende liste av ferdigbygde integrasjoner** som din LLM kan koble seg direkte til
+- **En standardisert måte å bygge tilpassede integrasjoner** for AI-applikasjoner  
+- **En åpen protokoll** som alle kan implementere og bruke fritt
+- **Fleksibiliteten til å bytte mellom ulike apper** og ta konteksten din med deg
+
+---
+
 # **Model Context Protocol** 🎉
 
 <div style="font-size: 24px;">
