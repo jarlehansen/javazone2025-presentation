@@ -204,7 +204,7 @@ style: |
 - **Lansert november 2024** av Anthropic som en åpen standard
 - **Problemet**: AI-assistenter lever i isolasjon uten tilgang til dine data og verktøy
 - **Løsningen**: Standardisert måte for AI-modeller å kommunisere sikkert med eksterne systemer
-- **Praktisk**: La Claude få tilgang til din kodebase, databaser, eller forretningsdata
+- **Praktisk**: Tilgang til din kodebase, databaser, eller forretningsdata
 - **Sikkert**: Kontrollert tilgang - du bestemmer hva AI-en kan se og gjøre
 
 ---
@@ -308,6 +308,76 @@ Brave Search, Fetch, Time
 
 ---
 
+# **MCP Transport Layer** 🚚
+
+<div class="columns">
+<div>
+
+## 📡 **Stdio Transport**
+- Bruker standard io
+- Optimal ytelse uten nettverks-overhead
+- Direkte kommunikasjon mellom lokale prosesser
+
+</div>
+<div>
+
+## 🌐 **HTTP Transport** 
+- HTTP POST for meldinger fra klient til server
+- Server-Sent Events (SSE) for streaming
+- Støtter remote servere
+- Autentisering: Bearer tokens, API-nøkler, custom headers
+
+</div>
+</div>
+
+### **🔑 JSON-RPC 2.0 format på begge**
+
+---
+
+# **JSON-RPC Meldingseksempel** 📡
+
+<div class="columns">
+<div>
+
+### **Klient → Server**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "get_weather",
+    "arguments": {
+      "location": "Oslo"
+    }
+  }
+}
+```
+
+</div>
+<div>
+
+### **Server → Klient**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Oslo: 5°C, delvis skyet. Vind: 10 km/t fra vest."
+      }
+    ]
+  }
+}
+```
+
+</div>
+</div>
+
+---
+
 # **MCP Byggeklosser** 🏗️
 
 <div style="text-align: left; margin: 0 auto; width: 90%;">
@@ -315,13 +385,105 @@ Brave Search, Fetch, Time
 ## 🗂️ **Resources**
 Statisk innhold: dokumenter, konfigurasjon, data
 
-## 🔨 **Tools**  
+## 🔨 **Tools**
 Funksjoner AI kan kalle: søk, opprett, oppdater
 
 ## 💬 **Prompts**
 Forhåndsdefinerte templates for spesifikke oppgaver
 
 </div>
+
+---
+
+<style scoped>
+section {
+  padding-top: 20px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+img[src*="mcp-architecture.png"] {
+  max-width: 90% !important;
+  max-height: 70vh !important;
+  width: auto !important;
+  height: auto !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+</style>
+
+![](images/mcp-architecture.png)
+
+---
+
+# **Hva skjer under panseret** 🔍
+
+<style scoped>
+.step-item {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: stepSlideIn 0.3s ease-out forwards;
+  margin-bottom: 35px;
+}
+
+.step-item:nth-child(1) { animation-delay: 0.1s; }
+.step-item:nth-child(2) { animation-delay: 0.2s; }
+.step-item:nth-child(3) { animation-delay: 0.3s; }
+.step-item:nth-child(4) { animation-delay: 0.4s; }
+.step-item:nth-child(5) { animation-delay: 0.5s; }
+.step-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes stepSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+</style>
+
+<div style="text-align: left; font-size: 26px; line-height: 1.8;">
+
+<div class="step-item">🔵  Klienten sender spørsmålet ditt til Claude</div>
+
+<div class="step-item">🧠  Claude analyserer tilgjengelige verktøy og bestemmer hva som brukes</div>
+
+<div class="step-item">⚡  Klienten utfører valgte verktøy gjennom MCP-serveren</div>
+
+<div class="step-item">📤  Resultatene sendes tilbake til Claude</div>
+
+<div class="step-item">💬  Claude formulerer et naturlig språk-svar</div>
+
+<div class="step-item">✨  Svaret vises til deg!</div>
+
+</div>
+
+---
+
+# Resources (Application-Controlled):
+- AI application automatically reads them as needed
+- No user approval required
+- AI decides when to fetch context data
+- Think: "Background information the AI can access"
+
+# Tools (Model-Controlled but User-Approved):
+- AI requests permission to execute them
+- User must approve each tool call
+- AI asks: "Can I send this email?" or "Should I delete this file?"
+- Think: "Actions the AI can perform with permission"
+
+---
+
+# Prompts
+Prompts in MCP are pre-built, reusable interaction templates that help users get started with complex workflows. They're like "conversation starters" that know how to use the server's Tools and Resources effectively.
+
+## Why Prompts Are Valuable
+Discoverability: Users see what the server can do
+Structure: Complex workflows become simple forms
+Best Practices: Server authors encode their expertise
+Consistency: Same workflow works reliably every time
+Guidance: AI knows exactly how to use Tools and Resources together
 
 ---
 
