@@ -5,7 +5,8 @@
   "author": "Jarle Hansen",
   "scripts": {
     "dev": "marp --watch mcp.md -o presentation.html",
-    "start": "marp mcp.md -o presentation.html"
+    "start": "marp mcp.md -o presentation.html",
+    "present": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/presentation.html https://start.spring.io"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.2.3"
