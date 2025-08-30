@@ -4,25 +4,12 @@ theme: uncover
 class: invert
 paginate: false
 footer: 'Jarle Hansen | Systek'
-transition: fade
+transition: slide
 style: |
   section {
     font-size: 28px;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
-    animation: slideIn 0.5s ease-out;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(15px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
   }
   
   @keyframes heroSlideIn {
@@ -44,18 +31,40 @@ style: |
     font-size: 50px;
     color: #00d4ff;
     position: relative;
+    animation: titleDropIn 1.2s ease-out;
+  }
+  
+  h1:not(#fra-konsept-til-kode)::after {
+    animation: none !important;
+  }
+  
+  @keyframes titleDropIn {
+    from {
+      transform: translateY(-25px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
   
   section:first-of-type h1::after {
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
+  
+  
+  h1::after {
     content: '';
     position: absolute;
     bottom: -5px;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
     height: 3px;
     background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-    transform: scaleX(0);
-    animation: underlineExpand 0.5s ease-out 0.6s forwards;
   }
   
   #fra-konsept-til-kode::after {
@@ -82,9 +91,6 @@ style: |
     }
   }
   
-  @keyframes underlineExpand {
-    to { transform: scaleX(1); }
-  }
   
   @keyframes underlinePulse {
     0%, 100% {
@@ -192,15 +198,15 @@ style: |
 <!-- _footer: '' -->
 
 # Fra Konsept til Kode
-## Implementer din egen MCP-server 
+## Implementer din egen MCP-server 💻
 
 <br>
 
-**JavaZone 2025**
+**JavaZone 2025** ☕
 
 <br>
 
-**Jarle Hansen**
+**Jarle Hansen** 
 **Systek**
 
 ---
@@ -332,7 +338,7 @@ Brave Search, Fetch, Time
 
 ---
 
-# **JSON-RPC Meldingseksempel** 📡
+# **JSON-RPC Meldingseksempel**
 
 <div class="columns">
 <div>
@@ -376,14 +382,14 @@ Brave Search, Fetch, Time
 
 ---
 
-# **Hvordan fungerer MCP?** 🔧
+# **Hvordan fungerer MCP?**
 
 ![](images/mcp-server.png)
 
 ---
 
 
-# **MCP Byggeklosser** 🏗️
+# **MCP Byggeklosser**
 
 <div style="text-align: left; margin: 0 auto; width: 90%;">
 
@@ -400,7 +406,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Hva skjer under panseret** 🔍
+# **Hva skjer under panseret**
 
 <style scoped>
 .step-item {
@@ -443,7 +449,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Demo: JavaZone MCP Server** 🚀
+# **Demo: JavaZone MCP Server**
 
 <div style="display: flex; flex-direction: column; align-items: center;">
 
@@ -459,7 +465,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Vi skal bygge 🚀**
+# **Vi skal bygge**
 
 
 <div style="display: flex; flex-direction: column; align-items: center;">
@@ -490,7 +496,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 ---
 
 
-# **Andre alternativer for MCP-servere** 🎯
+# **Andre alternativer for MCP-servere**
 
 <div class="columns">
 <div>
@@ -543,7 +549,7 @@ var app = builder.Build();
 
 ---
 
-# **IntelliJ som MCP Server** 💡
+# **IntelliJ som MCP Server**
 
 <div class="columns">
 <div>
@@ -571,7 +577,7 @@ var app = builder.Build();
 
 ---
 
-# **Best Practices** ✅
+# **Best Practices**
 
 <div class="columns">
 <div>
@@ -596,7 +602,7 @@ var app = builder.Build();
 
 ---
 
-# **Oppsummering** 🎯
+# **Oppsummering**
 
 - 🌐 **MCP standardiserer AI-integrasjoner** - én protokoll for alle
 - 🚀 **Spring AI + Kotlin** gjør implementering enkel og kjent  
@@ -622,4 +628,4 @@ var app = builder.Build();
 
 </div>
 
-![bg opacity:0.15](images/minecraft.png)
+![bg opacity:0.1](images/minecraft.png)
