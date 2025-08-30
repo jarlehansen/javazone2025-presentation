@@ -25,10 +25,6 @@ style: |
     }
   }
   
-  section:has(h1) {
-    animation: heroSlideIn 0.5s ease-out;
-  }
-  
   @keyframes heroSlideIn {
     from {
       transform: translateX(20px) scale(0.98);
@@ -47,11 +43,10 @@ style: |
   h1 {
     font-size: 50px;
     color: #00d4ff;
-    animation: titleSlide 0.6s ease-out 0.2s both;
     position: relative;
   }
   
-  h1::after {
+  section:first-of-type h1::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -61,6 +56,10 @@ style: |
     background: linear-gradient(90deg, transparent, #00d4ff, transparent);
     transform: scaleX(0);
     animation: underlineExpand 0.5s ease-out 0.6s forwards;
+  }
+  
+  #fra-konsept-til-kode::after {
+    animation: underlineExpand 0.5s ease-out 0.6s forwards, underlinePulse 6s ease-in-out 1.5s infinite;
   }
   
   @keyframes titleSlide {
@@ -74,8 +73,26 @@ style: |
     }
   }
   
+  @keyframes titleFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-25px);
+    }
+  }
+  
   @keyframes underlineExpand {
     to { transform: scaleX(1); }
+  }
+  
+  @keyframes underlinePulse {
+    0%, 100% {
+      transform: scaleX(1);
+    }
+    50% {
+      transform: scaleX(0.3);
+    }
   }
   
   h2 {
@@ -108,6 +125,8 @@ style: |
     gap: 1rem;
   }
   
+  
+
   section::after {
     content: '✨';
     position: absolute;
@@ -203,9 +222,8 @@ style: |
 
 - **Lansert november 2024** av Anthropic som en åpen standard
 - **Problemet**: AI-assistenter lever i isolasjon uten tilgang til dine data og verktøy
-- **Løsningen**: Standardisert måte for AI-modeller å kommunisere sikkert med eksterne systemer
+- **Løsningen**: Standardisert måte for AI-modeller å kommunisere med eksterne systemer
 - **Praktisk**: Tilgang til din kodebase, databaser, eller forretningsdata
-- **Sikkert**: Kontrollert tilgang - du bestemmer hva AI-en kan se og gjøre
 
 ---
 
@@ -256,11 +274,10 @@ style: |
 <br>
 
 #### **🎯 MCP er raskt på vei til å bli universell standard**  
-Alle store AI-leverandører implementerer støtte
 
 ---
 
-# **Offisielle MCP-servere** 📚
+# **Offisielle MCP-servere**
 
 <div class="columns">
 <div>
@@ -289,26 +306,8 @@ Brave Search, Fetch, Time
 
 ---
 
-# **Hvordan fungerer MCP?** 🔧
 
-<div class="columns">
-<div>
-
-![](images/mcp-server.png)
-
-</div>
-<div style="font-size: 24px; text-align: left;">
-
-- **Transport**: STDIO (lokal) eller SSE (remote)
-- **Protocol**: JSON-RPC 2.0 over transport
-- **Format**: Standardisert request/response
-
-</div>
-</div>
-
----
-
-# **MCP Transport Layer** 🚚
+# **Hvordan fungerer MCP?** 🚚
 
 <div class="columns">
 <div>
@@ -323,9 +322,8 @@ Brave Search, Fetch, Time
 
 ## 🌐 **HTTP Transport** 
 - HTTP POST for meldinger fra klient til server
-- Server-Sent Events (SSE) for streaming
-- Støtter remote servere
-- Autentisering: Bearer tokens, API-nøkler, custom headers
+- Streamable HTTP, feks Server-Sent Events (SSE)
+- Autentisering: OAuth, API-nøkler, custom headers
 
 </div>
 </div>
@@ -378,6 +376,13 @@ Brave Search, Fetch, Time
 
 ---
 
+# **Hvordan fungerer MCP?** 🔧
+
+![](images/mcp-server.png)
+
+---
+
+
 # **MCP Byggeklosser** 🏗️
 
 <div style="text-align: left; margin: 0 auto; width: 90%;">
@@ -392,29 +397,6 @@ Funksjoner AI kan kalle: søk, opprett, oppdater
 Forhåndsdefinerte templates for spesifikke oppgaver
 
 </div>
-
----
-
-<style scoped>
-section {
-  padding-top: 20px !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-img[src*="mcp-architecture.png"] {
-  max-width: 90% !important;
-  max-height: 70vh !important;
-  width: auto !important;
-  height: auto !important;
-  margin-top: 0 !important;
-  position: relative !important;
-  z-index: 10 !important;
-}
-</style>
-
-![](images/mcp-architecture.png)
 
 ---
 
@@ -445,45 +427,19 @@ img[src*="mcp-architecture.png"] {
 
 <div style="text-align: left; font-size: 26px; line-height: 1.8;">
 
-<div class="step-item">🔵  Klienten sender spørsmålet ditt til Claude</div>
+1. <div class="step-item">🔵  Klienten sender spørsmålet ditt til Claude</div>
 
-<div class="step-item">🧠  Claude analyserer tilgjengelige verktøy og bestemmer hva som brukes</div>
+2. <div class="step-item">🧠  Claude analyserer tilgjengelige verktøy og bestemmer hva som brukes</div>
 
-<div class="step-item">⚡  Klienten utfører valgte verktøy gjennom MCP-serveren</div>
+3. <div class="step-item">⚡  Klienten utfører valgte verktøy gjennom MCP-serveren</div>
 
-<div class="step-item">📤  Resultatene sendes tilbake til Claude</div>
+4. <div class="step-item">📤  Resultatene sendes tilbake til Claude</div>
 
-<div class="step-item">💬  Claude formulerer et naturlig språk-svar</div>
+5. <div class="step-item">💬  Claude lager et passende svar</div>
 
-<div class="step-item">✨  Svaret vises til deg!</div>
+6. <div class="step-item">✨  Svaret vises til deg!</div>
 
 </div>
-
----
-
-# Resources (Application-Controlled):
-- AI application automatically reads them as needed
-- No user approval required
-- AI decides when to fetch context data
-- Think: "Background information the AI can access"
-
-# Tools (Model-Controlled but User-Approved):
-- AI requests permission to execute them
-- User must approve each tool call
-- AI asks: "Can I send this email?" or "Should I delete this file?"
-- Think: "Actions the AI can perform with permission"
-
----
-
-# Prompts
-Prompts in MCP are pre-built, reusable interaction templates that help users get started with complex workflows. They're like "conversation starters" that know how to use the server's Tools and Resources effectively.
-
-## Why Prompts Are Valuable
-Discoverability: Users see what the server can do
-Structure: Complex workflows become simple forms
-Best Practices: Server authors encode their expertise
-Consistency: Same workflow works reliably every time
-Guidance: AI knows exactly how to use Tools and Resources together
 
 ---
 
@@ -508,34 +464,13 @@ Guidance: AI knows exactly how to use Tools and Resources together
 
 <div style="display: flex; flex-direction: column; align-items: center;">
 
-✅ **Spring Boot applikasjon fra scratch**
+🌱 **Spring Boot applikasjon fra scratch (Kotlin + Spring AI)**
 
-✅ **Implementere JavaZone API-integrasjon**
+🔗 **Implementere JavaZone API-integrasjon**
 
-✅ **Legge til MCP server-funksjonalitet**
+⚙️ **Legge til MCP server-funksjonalitet**
 
-✅ **Teste med Claude Desktop**
-
-</div>
-
-
----
-
-# **Spring AI MCP** 🌱
-
-<div style="text-align: left; margin: 0 auto; width: 85%;">
-
-### **Hvorfor Spring AI?**
-
-✅ Kjent programmeringsmodell (@Tool, @Component)
-
-✅ Spring Boot auto-configuration
-
-✅ Production-ready (metrics, security, tracing)
-
-✅ Sømløs integrasjon med eksisterende kode
-
-✅ Støtte for både Kotlin og Java
+🧪 **Teste med Claude Desktop**
 
 </div>
 
@@ -551,7 +486,6 @@ Guidance: AI knows exactly how to use Tools and Resources together
 ##### **— Josh Long, Spring Developer Advocate** 🌱
 
 </div>
-
 
 ---
 
@@ -637,78 +571,28 @@ var app = builder.Build();
 
 ---
 
-# **Produksjons-tips** 🏭
+# **Best Practices** ✅
 
 <div class="columns">
 <div>
 
-### **Sikkerhet**
-```kotlin
-@Tool
-@RequiresAuth
-@RateLimit(100, "1h")
-fun sensitiveOp()
-```
-
-### **Ytelse**
-- Cache responses
-- Paginer data
-- Async I/O
+### **👍 DO's**
+- Beskriv tools tydelig
+- Valider all input
+- Robust error handling
+- Logg til stderr (ikke stdout)
+- Type hints og dokumentasjon
 
 </div>
 <div>
 
-### **Observability**
-```kotlin
-@Tool
-@Timed("mcp.tool")
-@Counted("mcp.calls")
-fun trackedOp()
-```
-
-### **Testing**
-- Unit tests for tools
-- Integration tests
-- Contract testing
-
-</div>
-</div>
-
----
-
-# **Best Practices** ✅
-
-<div style="text-align: left; margin: 0 auto; width: 85%;">
-
-### **DO's** 👍
-- Beskriv tools godt - AI trenger kontekst
-- Valider all input - alltid!
-- Implementer paginering
-- Bruk semantic versioning
-- Logg for debugging og compliance
-
-### **DON'Ts** 👎
-- Eksponere sensitive operasjoner uten auth
+### **👎 DON'Ts** 
+- Skrive til stdout/console
+- Eksponere uten autentisering
 - Returnere for store datasett
-- Hardkode credentials
-- Ignorere error handling
 
 </div>
-
----
-
-# **MCP Roadmap** 🗺️
-
-## **MCP Registry** 🚀
-
-- Under aktiv utvikling
-- **Sentralisert server-discovery og metadata**
-- **API-lag** som tredjepartsmarkedsplasser kan bygge på
-- Forenkler server-distribusjon og oppdagelse
-
-<br>
-
-**📖 Les mer:** [modelcontextprotocol.io/development/roadmap](https://modelcontextprotocol.io/development/roadmap)
+</div>
 
 ---
 
@@ -730,8 +614,12 @@ fun trackedOp()
 🔗 `modelcontextprotocol.io`
 🔗 `docs.spring.io/spring-ai/mcp`
 
+<br>
+
 ##### **Kontakt**
 📧 LinkedIn: Jarle Hansen
 📧 E-post: jarle@jarlehansen.net
 
 </div>
+
+![bg opacity:0.15](images/minecraft.png)
