@@ -213,21 +213,31 @@ style: |
 
 # **Agenda** 📋
 
-- ✨ **Hva er Model Context Protocol** - Og hvorfor er det nyttig
-- 🚀 **Hvordan fungerer det**
-- 🔧 **Live Demo** - Lage vår egen MCP server
-  - Bruk av Spring AI
-  - Integreres med Claude desktop
-- ⚡ **Alternativer** - Hvilke andre teknologier finnes? Standard MCP servere?
-- 🏭 **Best practices** - Hvordan få mest mulig ut av MCP.
-- 🏁 **Oppsummering** - Hva har vi lært?
+1. 🔍 **Problem og løsning**
+   - Hva er MCP?
+   - Verdien det gir
+
+2. 🛠️ **Teknisk oversikt**
+   - Transport og protokoll  
+   - Under panseret
+
+3. 💻 **Praktisk demo**
+   - Implementere en MCP Server
+
+4. 🌐 **Alternativer**
+   - Andre språk/rammeverk
+   - Alternativ MCP server
+
+5. 🏁 **Wrap-up**
+   - Best practices
+   - Oppsummering
 
 ---
 
 # ✨ Hva er Model Context Protocol?
 
 - **Lansert november 2024** av Anthropic som en åpen standard
-- **Problemet**: AI-assistenter lever i isolasjon uten tilgang til dine data og verktøy
+- **Problemet**: AI-verktøy lever i isolasjon uten tilgang til dine data og systemer
 - **Løsningen**: Standardisert måte for AI-modeller å kommunisere med eksterne systemer
 - **Praktisk**: Tilgang til din kodebase, databaser, eller forretningsdata
 
@@ -313,7 +323,7 @@ Brave Search, Fetch, Time
 ---
 
 
-# **Hvordan fungerer MCP?** 🚚
+# **Transport laget** 🚚
 
 <div class="columns">
 <div>
@@ -382,7 +392,7 @@ Brave Search, Fetch, Time
 
 ---
 
-# **Hvordan fungerer MCP?**
+# **Livssyklus**
 
 ![](images/mcp-server.png)
 
