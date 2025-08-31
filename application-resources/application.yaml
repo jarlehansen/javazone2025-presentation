@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: off
+    web-application-type: none
+  ai:
+    mcp:
+      server:
+        name: javazone-mcp
+        version: 1.0.0
+        type: SYNC
