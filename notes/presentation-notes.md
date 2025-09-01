@@ -78,3 +78,5 @@ Og det siste er at kall sendes fra klienten til serveren når brukeren har bedt 
 
 
 # Josh Long
+I følge josh long, så er hans favorittsted nummer 2 på internett spring initialzr.
+Vi skal ta hans råd, og gå til start.spring.io
