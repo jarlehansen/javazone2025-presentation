@@ -459,17 +459,15 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Demo: JavaZone MCP Server**
+# **Demo: JavaZone MCP Server** 🎬
 
 <div style="display: flex; flex-direction: column; align-items: center;">
 
-🔍 **Søke etter foredragsholdere**
+📊 **Finne generell informasjon om sesjonene**
 
-⏰ **Finne når foredrag holdes**  
+🔍 **Søke etter detaljer om presentasjonen for en foredragsholdere**
 
-📋 **Hente programinformasjon**
-
-🏷️ **Søke etter tema/teknologier**
+💻 **IntelliJ som MCP server (fra versjon 2025.2)**
 
 </div>
 
@@ -559,53 +557,24 @@ var app = builder.Build();
 
 ---
 
-# **IntelliJ som MCP Server**
-
-<div class="columns">
-<div>
-
-🔌 **Gi AI tilgang til IDE-funksjonalitet**
-
-📅 **Tilgjengelig fra versjon 2025.2**
-
-</div>
-<div>
-
-- Navigere i kodebasen
-- Kjøre tester
-- Refaktorere kode
-- Analysere kodekvalitet
-
-</div>
-</div>
-
-<br>
-
-## **🎯 La oss se en rask demo!**
-
-**📖 Les mer:** [jetbrains.com/help/ai-assistant/mcp.html](https://www.jetbrains.com/help/ai-assistant/mcp.html#use_ide_as_an_mcp_server)
-
----
-
 # **Best Practices**
 
 <div class="columns">
 <div>
 
-### **👍 DO's**
-- Beskriv tools tydelig
-- Valider all input
-- Robust error handling
+### **🎯 Design & Implementering**
+- Lag tools for hele arbeidsflyter
+- Beskriv tools tydelig med handlingsorienterte navn
+- Robust error handling og validering
 - Logg til stderr (ikke stdout)
-- Type hints og dokumentasjon
 
 </div>
 <div>
 
-### **👎 DON'Ts** 
-- Skrive til stdout/console
-- Eksponere uten autentisering
-- Returnere for store datasett
+### **📈 Skalerbarhet & Sikkerhet**
+- Bruk namespace organisering (`files/read`, `db/query`)
+- Aldri eksponere uten autentisering
+- Vurder flere MCP-servere for store systemer
 
 </div>
 </div>
@@ -625,8 +594,7 @@ var app = builder.Build();
 
 <div style="text-align: left; margin: 0 auto; width: 85%;">
 
-##### **Kode & Docs**
-🔗 `github.com/jarlehansen/javazone-mcp-demo`
+##### **Referanser**
 🔗 `modelcontextprotocol.io`
 🔗 `docs.spring.io/spring-ai/mcp`
 

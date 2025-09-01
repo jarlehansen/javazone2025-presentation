@@ -12,6 +12,10 @@ echo "Removing javazone-mcp configuration from Claude config..."
 sed -i '' '/javazone-mcp/,+6d' "$CLAUDE_CONFIG"
 echo "Removed javazone-mcp block from configuration"
 
+# Find the line with "jetbrains" and delete it plus the next 10 lines (11 total)
+sed -i '' '/jetbrains/,+10d' "$CLAUDE_CONFIG"
+echo "Removed jetbrains block from configuration"
+
 # Step 2: Delete javazone-mcp.zip from Downloads
 echo "Removing javazone-mcp.zip from Downloads..."
 if [ -f "$HOME/Downloads/javazone-mcp.zip" ]; then
