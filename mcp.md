@@ -172,6 +172,20 @@ style: |
     text-align: left;
   }
   
+  /* Reduce spacing between numbered lists and their sub-bullets */
+  ol li ul {
+    margin-top: -0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  ol li ul li {
+    font-style: italic;
+  }
+  
+  ol li {
+    margin-bottom: 0.8em;
+  }
+  
   img[src] {
     max-width: 100%;
     max-height: 50vh;
@@ -236,10 +250,11 @@ style: |
 
 # ✨ Hva er Model Context Protocol?
 
-- **Lansert november 2024** av Anthropic som en åpen standard
+- **Lansert november 2024** av Anthropic
+<br>
 - **Problemet**: AI-verktøy lever i isolasjon uten tilgang til dine data og systemer
+<br>
 - **Løsningen**: Standardisert måte for AI-modeller å kommunisere med eksterne systemer
-- **Praktisk**: Tilgang til din kodebase, databaser, eller forretningsdata
 
 ---
 
@@ -251,10 +266,19 @@ style: |
 
 # **MCP gir deg** 🎁
 
-- **En voksende liste av ferdigbygde integrasjoner** som din LLM kan koble seg direkte til
-- **En standardisert måte å bygge tilpassede integrasjoner** for AI-applikasjoner  
-- **En åpen protokoll** som alle kan implementere og bruke fritt
-- **Fleksibiliteten til å bytte mellom ulike apper** og ta konteksten din med deg
+- **En voksende liste av ferdigbygde integrasjoner**
+
+<br>
+
+- **En standardisert måte å bygge tilpassede integrasjoner**
+
+<br>
+
+- **En åpen protokoll som alle kan implementere og bruke fritt**
+
+<br>
+
+- **Fleksibiliteten til å bytte mellom ulike apper**
 
 ---
 
@@ -318,7 +342,7 @@ Brave Search, Fetch, Time
 
 <br>
 
-##### **🔗 github.com/modelcontextprotocol/servers**
+##### **🔗 [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)**
 
 ---
 
@@ -330,7 +354,7 @@ Brave Search, Fetch, Time
 
 ## 📡 **Stdio Transport**
 - Bruker standard io
-- Optimal ytelse uten nettverks-overhead
+- God ytelse, ikke nettverks-overhead
 - Direkte kommunikasjon mellom lokale prosesser
 
 </div>
@@ -394,7 +418,28 @@ Brave Search, Fetch, Time
 
 # **Livssyklus**
 
-![](images/mcp-server.png)
+<div class="columns">
+<div>
+
+![width:400px](images/mcp-server.png)
+
+</div>
+<div>
+
+<br>
+
+**1. Initialization** - Klienten starter MCP-serveren og etablerer kommunikasjon
+
+<br>
+
+**2. Discovery** - Serveren viser tilgjengelige tools/resources/prompts
+
+<br>
+
+**3. Execution** - Klienten kaller tools og mottar resultatet
+
+</div>
+</div>
 
 ---
 
@@ -419,41 +464,56 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 # **Hva skjer under panseret**
 
 <style scoped>
-.step-item {
-  opacity: 0;
-  transform: translateX(-30px);
-  animation: stepSlideIn 0.3s ease-out forwards;
-  margin-bottom: 35px;
+.process-steps {
+  text-align: left; 
+  font-size: 26px; 
+  line-height: 1.8;
 }
 
-.step-item:nth-child(1) { animation-delay: 0.1s; }
-.step-item:nth-child(2) { animation-delay: 0.2s; }
-.step-item:nth-child(3) { animation-delay: 0.3s; }
-.step-item:nth-child(4) { animation-delay: 0.4s; }
-.step-item:nth-child(5) { animation-delay: 0.5s; }
-.step-item:nth-child(6) { animation-delay: 0.6s; }
+.process-steps > div {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: slideInStep 0.6s ease-out forwards;
+}
 
-@keyframes stepSlideIn {
-  to {
+.process-steps > div:nth-child(1) { animation-delay: 0.2s; }
+.process-steps > div:nth-child(2) { animation-delay: 0.5s; }
+.process-steps > div:nth-child(3) { animation-delay: 0.8s; }
+.process-steps > div:nth-child(4) { animation-delay: 1.1s; }
+.process-steps > div:nth-child(5) { animation-delay: 1.4s; }
+.process-steps > div:nth-child(6) { animation-delay: 1.7s; }
+
+@keyframes slideInStep {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
+
+/* Hover effect for interactivity */
+.process-steps > div:hover {
+  transform: translateX(10px);
+  transition: transform 0.2s ease;
+}
 </style>
 
-<div style="text-align: left; font-size: 26px; line-height: 1.8;">
+<div class="process-steps">
 
-1. <div class="step-item">🔵  Klienten sender spørsmålet ditt til Claude</div>
+<div>1. 🔵  Klienten sender spørsmålet til Claude</div>
 
-2. <div class="step-item">🧠  Claude analyserer tilgjengelige verktøy og bestemmer hva som brukes</div>
+<div>2. 🧠  Claude analyserer tilgjengelige tools og bestemmer hva som brukes</div>
 
-3. <div class="step-item">⚡  Klienten utfører valgte verktøy gjennom MCP-serveren</div>
+<div>3. ⚡  Klienten utfører valgte tools gjennom MCP-serveren</div>
 
-4. <div class="step-item">📤  Resultatene sendes tilbake til Claude</div>
+<div>4. 📤  Resultatene sendes tilbake til Claude</div>
 
-5. <div class="step-item">💬  Claude lager et passende svar</div>
+<div>5. 💬  Claude lager et passende svar</div>
 
-6. <div class="step-item">✨  Svaret vises til deg!</div>
+<div>6. ✨  Svaret returneres</div>
 
 </div>
 
@@ -463,31 +523,19 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 <div style="display: flex; flex-direction: column; align-items: center;">
 
+<br>
+
 📊 **Finne generell informasjon om sesjonene**
 
+<br>
+
 🔍 **Søke etter detaljer om presentasjonen for en foredragsholdere**
+
+<br>
 
 💻 **IntelliJ som MCP server (fra versjon 2025.2)**
 
 </div>
-
----
-
-# **Vi skal bygge**
-
-
-<div style="display: flex; flex-direction: column; align-items: center;">
-
-🌱 **Spring Boot applikasjon fra scratch (Kotlin + Spring AI)**
-
-🔗 **Implementere JavaZone API-integrasjon**
-
-⚙️ **Legge til MCP server-funksjonalitet**
-
-🧪 **Teste med Claude Desktop**
-
-</div>
-
 
 ---
 
@@ -581,11 +629,27 @@ var app = builder.Build();
 
 ---
 
+# **Sikkerhet**
+
+**Security best practices  🔒**
+https://modelcontextprotocol.io/specification/latest
+
+---
+
 # **Oppsummering**
 
 - 🌐 **MCP standardiserer AI-integrasjoner** - én protokoll for alle
-- 🚀 **Spring AI + Kotlin** gjør implementering enkel og kjent  
-- 💻 **Demo** viser praktisk verdi på minutter
+
+<br>
+
+- 🚀 **Spring AI + Kotlin**, enkelt å komme i gang
+
+<br>
+
+- 💻 **Finnes en rekke implementasjoner** i ulike språk
+
+<br>
+
 - 🔓 **Åpen standard** - ingen vendor lock-in, bred støtte
 
 ---
@@ -606,4 +670,4 @@ var app = builder.Build();
 
 </div>
 
-![bg opacity:0.1](images/minecraft.png)
+![bg opacity:0.16](images/minecraft.png)
