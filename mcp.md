@@ -227,24 +227,24 @@ style: |
 
 # **Agenda** 📋
 
+<div style="font-size: 26px; line-height: 1.4;">
+
 1. 🔍 **Problem og løsning**
-   - Hva er MCP?
-   - Verdien det gir
+   - Hva er MCP? • Verdien det gir
 
 2. 🛠️ **Teknisk oversikt**
-   - Transport og protokoll  
-   - Under panseret
+   - Transport og protokoll • Under panseret
 
 3. 💻 **Praktisk demo**
    - Implementere en MCP Server
 
 4. 🌐 **Alternativer**
    - Andre språk/rammeverk
-   - Alternativ MCP server
 
 5. 🏁 **Wrap-up**
-   - Best practices
-   - Oppsummering
+   - Best practices • Oppsummering
+
+</div>
 
 ---
 
@@ -264,23 +264,6 @@ style: |
 
 ---
 
-# **MCP gir deg** 🎁
-
-- **En voksende liste av ferdigbygde integrasjoner**
-
-<br>
-
-- **En standardisert måte å bygge tilpassede integrasjoner**
-
-<br>
-
-- **En åpen protokoll som alle kan implementere og bruke fritt**
-
-<br>
-
-- **Fleksibiliteten til å bytte mellom ulike apper**
-
----
 
 # **Model Context Protocol** 🎉
 
@@ -313,7 +296,7 @@ style: |
 
 <br>
 
-#### **🎯 MCP er raskt på vei til å bli universell standard**  
+#### **🎯 MCP er på vei til å bli universell standard**  
 
 ---
 
@@ -503,7 +486,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 <div class="process-steps">
 
-<div>1. 🔵  Klienten sender spørsmålet til Claude</div>
+<div>1. 🔵  Brukeren skriver inn en prompt</div>
 
 <div>2. 🧠  Claude analyserer tilgjengelige tools og bestemmer hva som brukes</div>
 
@@ -519,7 +502,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
-# **Demo: JavaZone MCP Server** 🎬
+# **Demo: JavaZone MCP Server**
 
 <div style="display: flex; flex-direction: column; align-items: center;">
 
@@ -529,7 +512,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 <br>
 
-🔍 **Søke etter detaljer om presentasjonen for en foredragsholdere**
+🔍 **Søke etter detaljer om presentasjonen for en foredragsholder**
 
 <br>
 
@@ -551,6 +534,9 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 ---
 
+# Demo oppsummering 🎯
+
+---
 
 # **Andre alternativer for MCP-servere**
 
@@ -621,8 +607,8 @@ var app = builder.Build();
 
 ### **📈 Skalerbarhet & Sikkerhet**
 - Bruk namespace organisering (`files/read`, `db/query`)
-- Aldri eksponere uten autentisering
 - Vurder flere MCP-servere for store systemer
+- For remote servere, husk autentisering
 
 </div>
 </div>
@@ -642,7 +628,11 @@ https://modelcontextprotocol.io/specification/latest
 
 <br>
 
-- 🚀 **Spring AI + Kotlin**, enkelt å komme i gang
+- 🔓 **Åpen standard** - ingen vendor lock-in, bred støtte
+
+<br>
+
+- 🚀 **Demo: Kotlin + Spring AI**, enkelt å komme i gang
 
 <br>
 
@@ -650,7 +640,8 @@ https://modelcontextprotocol.io/specification/latest
 
 <br>
 
-- 🔓 **Åpen standard** - ingen vendor lock-in, bred støtte
+- 🔒 **Tenk på sikkerheten**
+
 
 ---
 
@@ -665,7 +656,7 @@ https://modelcontextprotocol.io/specification/latest
 <br>
 
 ##### **Kontakt**
-📧 LinkedIn: Jarle Hansen
+**Jarle Hansen**
 📧 E-post: jarle@jarlehansen.net
 
 </div>
