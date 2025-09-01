@@ -8,3 +8,7 @@ spring:
         name: javazone-mcp
         version: 1.0.0
         type: SYNC
+
+logging:
+  pattern:
+    console: " "

@@ -1,0 +1,11 @@
+"jetbrains": {
+      "command": "/Users/jarlehansen/Applications/IntelliJ IDEA Community Edition.app/Contents/jbr/Contents/Home/bin/java",
+      "args": [
+        "-classpath",
+        "/Users/jarlehansen/Applications/IntelliJ IDEA Community Edition.app/Contents/plugins/mcpserver/lib/mcpserver-frontend.jar:/Users/jarlehansen/Applications/IntelliJ IDEA Community Edition.app/Contents/lib/util-8.jar",
+        "com.intellij.mcpserver.stdio.McpStdioRunnerKt"
+      ],
+      "env": {
+        "IJ_MCP_SERVER_PORT": "64342"
+      }
+    }
