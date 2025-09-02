@@ -520,7 +520,7 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 <br>
 
-📊 **Finne generell informasjon om sesjonene**
+📊 **Finne generell informasjon om konferansen**
 
 <br>
 

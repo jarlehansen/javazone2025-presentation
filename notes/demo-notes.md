@@ -6,17 +6,10 @@ package-name: com.example.javazone
 2. kjøre init.sh scriptet
 3. Endre spring-ai-starter-mcp-server-webmvc dependency'en til spring-ai-starter-mcp-server
 4. implementer sessions() som henter ut alle JavaZone sessions med RestClient
-5. Sett opp @Bean conferenceTool, som konfigurerer at servicen lastes inn
+5. implementer getConferenceSummary. Denne skal hente ut antall sessions og antall rom på JavaZone
 ```
-@Bean
-fun conferenceTool(service: ConferenceService) =
-    MethodToolCallbackProvider.builder().toolObjects(service).build()
-```
-
-6. implementer getScheduleSummary. Denne skal hente ut antall sessions og antall rom på JavaZone
-```
-@Tool(description = "Get the schedule summary for the 2025 JavaZone conference")
-fun getScheduleSummary(): Map<String, Int> {
+@Tool(description = "Get the conference summary for the 2025 JavaZone conference")
+fun getConferenceSummary(): Map<String, Int> {
     val sessions = sessions()
     return mapOf(
         "sessions" to sessions.size,
@@ -25,10 +18,17 @@ fun getScheduleSummary(): Map<String, Int> {
 }
 ```
 
+6. Sett opp @Bean conferenceTool, som konfigurerer at servicen lastes inn
+```
+@Bean
+fun conferenceTool(service: ConferenceService) =
+    MethodToolCallbackProvider.builder().toolObjects(service).build()
+```
+
 7. konfigurer claude config til å laste inn mcp serveren
 8. kjør ./restart_claude.sh for å laste inn serveren
 9. Kjør en prompt for å teste 
-get general information and the schedule summary for the JavaZone 2025 conference
+get general information and a summary of the JavaZone 2025 conference
 
 10. utvid mcp serveren med å legge til getSessionDetails, hvor man kan sende inn speaker
 ```
