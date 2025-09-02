@@ -429,23 +429,6 @@ Brave Search, Fetch, Time
 </div>
 </div>
 
----
-
-
-# **MCP Byggeklosser**
-
-<div style="text-align: left; margin: 0 auto; width: 90%;">
-
-## 🗂️ **Resources**
-Statisk innhold: dokumenter, konfigurasjon, data
-
-## 🔨 **Tools**
-Funksjoner AI kan kalle: søk, opprett, oppdater
-
-## 💬 **Prompts**
-Forhåndsdefinerte templates for spesifikke oppgaver
-
-</div>
 
 ---
 

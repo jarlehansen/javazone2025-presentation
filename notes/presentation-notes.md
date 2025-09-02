@@ -18,7 +18,7 @@ Også skal vi se på kanskje det mest interessante her, vi skal ha en praktisk d
 Vi skal også prøve å ta i bruk en annen standard MCP server
 
 4. Alternativer
-Vi skal se på noen alternativer, hvilke andre muligheter man har av språk og rammeverk for MCP
+Vi skal se på noen alternativer, hvilke andre muligheter man har av forskjellige språk og rammeverk for MCP
 
 5. Avslutning
 Også helt til slutt se litt på best practices ved implementering av MCP og en oppsummering
@@ -39,7 +39,8 @@ På sammen måte prøver MCP å gjøre integrasjonen mellom ai-verktøy og ekste
 
 # Model Context Protocol
 Tenk på dette som en felles standard som de ulike verktøyene støtter
-Her har vi feks Claude og Gemini som støtter MCP, som igjen gjør det mulig å koble til feks en intern database for å kunne bruke dataene der til å berike konteksten og få enda mer nytte av ai på
+Her har vi feks Claude og Gemini som støtter MCP, som igjen gjør det mulig å koble til feks en intern database for å kunne bruke dataene der til å berike konteksten og få enda mer nytte av ai
+Så hele poenget her er at MCP ikke er knyttet til en viss modell eller verktøy
 
 
 # MCP support status
@@ -56,7 +57,7 @@ Gå på linken nederst for å finne en lang liste av ulike MCP servere.
 # Transport laget
 Hvis vi går videre til hvordan MCP fungerer teknisk, så skal vi starte med å se på transport laget.
 Man har 2 hoved-metoder, det ene er å kjøre som standard input-output, det andre er med å bruke HTTP
-
+Begge to bruker JSON RPS formatet på meldingene.
 
 # JSON-RPC meldingseksempel
 Metoden get_weather som kalles, med lokasjon som input
@@ -64,17 +65,11 @@ Responsen inneholder været på det stedet
 
 
 # Livssyklus
-Fungerer som følger
-Man starter med Initialization
+Livssyklusen beskriver hvordan klienten og serveren snakker sammen
+Den fungerer med at man starter med Initialization
 Så er det en discovery fase hvor serveren viser hva den tilbyr
 Og det siste er at kall sendes fra klienten til serveren når brukeren har bedt om relevant informasjon
 
-
-# MCP byggeklosser
-Byggeklossene for en MCP server er resources, som viser statisk innhold.
-Man har tools, som er funksjoner som kan bli kalt.
-Og til slutt prompts, som er forhåndsdefinerte templates.
-Den vi skal kikke nærmere på i dag er tools.
 
 # Hva skjer under panseret
 Brukeren skriver inn en prompt i klienten, feks Claude Desktop.
@@ -89,7 +84,7 @@ Vi skal nå hoppe over på en kjapp demo av dette.
 
 
 # Demo: JavaZone MCP server
-I demonstrasjonen skal bruke javazone API og vi gjøre 2 oppgaver:
+I demoen skal bruke javazone API og vi gjøre 2 oppgaver:
 1. Finne generell informasjon om konferansen
 2. Søke etter detaljer om en presentasjon for en foredragsholder
 
@@ -110,17 +105,25 @@ Den implementasjonen viser bare et alternativ, men det finnes mange andre.
 # Andre alternativer for MCP servere
 - Finnes mange ulike implementasjoner av MCP SDKen man kan bruke
 - Kotlin og Spring er bare en variant, her har vi listet opp noen av de andre
-- Bruk det som passer best i forhold til kompetanse og tech stack
+- Bruk det som passer best i forhold til kompetanse og tech stacken dere bruker
 
+Vi skal hoppe videre til å se litt på best practices for å implementere en MCP server.
 
 # Best practices
+På design og implementering, har vi det med å lage tools for hele arbeidsflyter.
+Det vi mener med det er at man kanskje må tenke litt annerledes enn med å designe REST tjenester, hvor man er mer fokusert på ressurser.
+I MCP vil det være en fordel å tenke use cases og funksjonalitet.
+
+På skalerbarhet og sikkerhet, så er første anbefaling å organisere funksjonaliteten i namespaces.
 
 
 # Sikkerhet
-
+Vi har ikke gått inn på sikkerhet i dette foredraget, men jeg vil bare nevne at det står om "security best practices" på den offisielle siden til MCP.
+Jeg vil også anbefale alle som skal ta i bruk MCP å kun gjøre det fra troverdige kilder. Det kan være ganske skummelt hvis man tar i bruk en MCP server som gjør ting den ikke burde.
 
 # Oppsummering
-- Håper dere fikk litt inspirasjon til å lage egne MCP servere og å ta i teknologien i bruk
-- 
+Vi har sett litt på at MCP standardiserer AI integrasjoner
+Håper dere fikk litt inspirasjon til å lage egne MCP servere og å ta i teknologien i bruk
 
 # Takk for meg
+Det var det jeg skulle presentere i dag, takk for meg!
