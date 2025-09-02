@@ -130,6 +130,10 @@ style: |
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+
+  .columns div:nth-child(2) {
+    text-align: left;
+  }
   
   
 
@@ -423,7 +427,8 @@ Brave Search, Fetch, Time
 
 <br>
 
-**1. Initialization** - Klienten starter MCP-serveren og etablerer kommunikasjon
+**1. Initialization** - Klienten starter MCP-serveren og etablerer kommunikasjon 
+*(Claude Desktop, Claude Code, <br>vs code...)*
 
 <br>
 

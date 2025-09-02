@@ -80,3 +80,26 @@ Og det siste er at kall sendes fra klienten til serveren når brukeren har bedt 
 # Josh Long
 I følge josh long, så er hans favorittsted nummer 2 på internett spring initialzr.
 Vi skal ta hans råd, og gå til start.spring.io
+
+
+# Demo oppsummering
+- Vist et eksempel med Kotlin og Spring AI
+- Hvor enkelt det er å komme i gang
+
+
+# Andre alternativer for MCP servere
+- Finnes mange ulike implementasjoner av MCP SDKen man kan bruke
+- Kotlin og Spring er bare en variant, her har vi listet opp noen av de andre
+- Bruk det som passer best i forhold til kompetanse og tech stack
+
+
+# Best practices
+
+
+# Sikkerhet
+
+
+# Oppsummering
+
+
+# Takk for meg
