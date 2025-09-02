@@ -309,7 +309,7 @@ style: |
 PostgreSQL, SQLite, MongoDB
 
 ### **🛠️ Dev Tools**
-GitHub, Git, Puppeteer
+GitHub, Git, Puppeteer, Context 7
 
 </div>
 <div>
@@ -326,6 +326,18 @@ Brave Search, Fetch, Time
 <br>
 
 ##### **🔗 [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)**
+
+---
+
+# Context 7
+
+<br>
+
+**Oppdatert, versjonsspesifikk kode-dokumentasjon direkte fra kilden til prosjektene**
+
+<br>
+
+##### **🔗 [github.com/upstash/context7](https://github.com/upstash/context7)**
 
 ---
 
@@ -619,6 +631,10 @@ var app = builder.Build();
 
 **Security best practices  🔒**
 https://modelcontextprotocol.io/specification/latest
+
+<br>
+
+**Bare bruk MCP fra troverdige kilder**
 
 ---
 
