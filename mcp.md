@@ -333,18 +333,6 @@ Brave Search, Fetch, Time
 
 ---
 
-# Context 7
-
-<br>
-
-**Oppdatert, versjonsspesifikk kode-dokumentasjon direkte fra kilden til prosjektene**
-
-<br>
-
-##### **🔗 [github.com/upstash/context7](https://github.com/upstash/context7)**
-
----
-
 
 # **Transport laget** 🚚
 
@@ -360,7 +348,7 @@ Brave Search, Fetch, Time
 <div>
 
 ## 🌐 **HTTP Transport** 
-- HTTP POST for meldinger fra klient til server
+- HTTP POST fra klient til server
 - Streamable HTTP, feks Server-Sent Events (SSE)
 - Autentisering: OAuth, API-nøkler, custom headers
 
@@ -427,7 +415,7 @@ Brave Search, Fetch, Time
 
 <br>
 
-**1. Initialization** - Klienten starter MCP-serveren og etablerer kommunikasjon 
+**1. Initialization** - Klienten finner MCP-serveren og etablerer kommunikasjon 
 *(Claude Desktop, Claude Code, <br>vs code...)*
 
 <br>
@@ -503,17 +491,17 @@ Forhåndsdefinerte templates for spesifikke oppgaver
 
 <div class="process-steps">
 
-<div>1. 🔵  Brukeren skriver inn en prompt</div>
+<div>1. 🔵 Brukeren skriver inn en prompt</div>
 
-<div>2. 🧠  Claude analyserer tilgjengelige tools og bestemmer hva som brukes</div>
+<div>2. 🧠 Klienten analyserer tilgjengelige tools og bestemmer hva som brukes</div>
 
 <div>3. ⚡  Klienten utfører valgte tools gjennom MCP-serveren</div>
 
-<div>4. 📤  Resultatene sendes tilbake til Claude</div>
+<div>4. 📤 Resultatene sendes tilbake til Klienten</div>
 
-<div>5. 💬  Claude lager et passende svar</div>
+<div>5. 💬 Klienten lager et passende svar</div>
 
-<div>6. ✨  Svaret returneres</div>
+<div>6. ✨ Svaret vises til brukeren</div>
 
 </div>
 
