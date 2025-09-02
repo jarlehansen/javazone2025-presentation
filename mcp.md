@@ -715,7 +715,7 @@ https://modelcontextprotocol.io/specification/latest
 
 ##### **Referanser**
 🔗 `modelcontextprotocol.io`
-🔗 `docs.spring.io/spring-ai/mcp`
+🔗 `docs.spring.io/spring-ai/reference`
 
 <br>
 
