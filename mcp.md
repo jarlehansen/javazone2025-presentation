@@ -210,6 +210,96 @@ style: |
     vertical-align: -0.1em !important;
     object-fit: contain !important;
   }
+
+  /* At This Point slide animations */
+  .at-this-point-quote {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    animation: fadeInUp 1.5s ease-out 0.5s forwards;
+  }
+
+  .josh-long-signature {
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInRight 0.4s ease-out 1s forwards;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+    }
+    60% {
+      opacity: 0.8;
+      transform: translateY(-10px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    70% {
+      opacity: 0.9;
+      transform: translateX(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Fade with glow effect */
+  .quote-text {
+    opacity: 0;
+    filter: blur(5px);
+    animation: fadeInSharp 0.5s ease-out 0.1s forwards;
+  }
+
+  .quote-highlight {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(3px);
+    animation: glowFocus 0.4s ease-out 0.6s forwards;
+  }
+
+  @keyframes fadeInSharp {
+    0% {
+      opacity: 0;
+      filter: blur(5px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes glowFocus {
+    0% {
+      opacity: 0;
+      transform: scale(1.2);
+      filter: blur(3px);
+      text-shadow: 0 0 20px #00d4ff;
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.1);
+      filter: blur(1px);
+      text-shadow: 0 0 15px #00d4ff;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px);
+      text-shadow: 0 0 8px #00d4ff;
+    }
+  }
 ---
 
 <!-- _paginate: false -->
@@ -488,13 +578,17 @@ Brave Search, Fetch, Time
 
 ---
 
-<div style="text-align: center; margin: 40px 0;">
+<div style="text-align: center; margin: 40px 0;" class="at-this-point-quote">
 
-## 💬 "At this point, I wanted to start building! So, I went to my second favorite place on the internet, the Spring Initializr - [**start.spring.io**](https://start.spring.io)"
+<div class="quote-text">
+<h2>💬 "At this point, I wanted to start building! So, I went to my second favorite place on the internet, the Spring Initializr - <span class="quote-highlight"><a href="https://start.spring.io"><strong>start.spring.io</strong></a></span>"</h2>
+</div>
 
 <br>
 
-##### **— Josh Long, Spring Developer Advocate** 🌱
+<div class="josh-long-signature">
+<h5><strong>— Josh Long, Spring Developer Advocate</strong> 🌱</h5>
+</div>
 
 </div>
 
