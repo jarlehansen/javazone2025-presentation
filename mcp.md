@@ -324,19 +324,14 @@ style: |
 <div style="font-size: 26px; line-height: 1.4;">
 
 1. 🔍 **Problem og løsning**
-   - Hva er MCP? • Verdien det gir
 
 2. 🛠️ **Teknisk oversikt**
-   - Transport og protokoll • Under panseret
 
 3. 💻 **Praktisk demo**
-   - Implementere en MCP Server
 
-4. 🌐 **Alternativer**
-   - Andre språk/rammeverk
+4. 🌐 **Alternativer for MCP implementasjon**
 
 5. 🏁 **Wrap-up**
-   - Best practices • Oppsummering
 
 </div>
 
@@ -408,7 +403,6 @@ Brave Search, Fetch, Time
 <div>
 
 ## 📡 **Stdio Transport**
-- Bruker standard io
 - God ytelse, ikke nettverks-overhead
 - Direkte kommunikasjon mellom lokale prosesser
 
@@ -417,57 +411,13 @@ Brave Search, Fetch, Time
 
 ## 🌐 **HTTP Transport** 
 - HTTP POST fra klient til server
-- Streamable HTTP, feks Server-Sent Events (SSE)
+- Streamable HTTP implementasjon, feks Server-Sent Events (SSE)
 - Autentisering: OAuth, API-nøkler, custom headers
 
 </div>
 </div>
 
 ### **🔑 JSON-RPC 2.0 format på begge**
-
----
-
-# **JSON-RPC Meldingseksempel**
-
-<div class="columns">
-<div>
-
-### **Klient → Server**
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "tools/call",
-  "params": {
-    "name": "get_weather",
-    "arguments": {
-      "location": "Oslo"
-    }
-  }
-}
-```
-
-</div>
-<div>
-
-### **Server → Klient**
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": {
-    "content": [
-      {
-        "type": "text",
-        "text": "Oslo: 5°C, delvis skyet. Vind: 10 km/t fra vest."
-      }
-    ]
-  }
-}
-```
-
-</div>
-</div>
 
 ---
 
@@ -483,7 +433,7 @@ Brave Search, Fetch, Time
 
 <br>
 
-**1. Initialization** - Klienten finner MCP-serveren og etablerer kommunikasjon 
+**1. Initialization** - Klienten kobler seg til MCP-serveren og etablerer kommunikasjon 
 *(Claude Desktop, Claude Code, <br>vs code...)*
 
 <br>
@@ -500,7 +450,7 @@ Brave Search, Fetch, Time
 
 ---
 
-# **Hva skjer under panseret**
+# **Demo: JavaZone MCP Server**
 
 <style scoped>
 .process-steps {
@@ -516,11 +466,8 @@ Brave Search, Fetch, Time
 }
 
 .process-steps > div:nth-child(1) { animation-delay: 0.2s; }
-.process-steps > div:nth-child(2) { animation-delay: 0.5s; }
-.process-steps > div:nth-child(3) { animation-delay: 0.8s; }
-.process-steps > div:nth-child(4) { animation-delay: 1.1s; }
-.process-steps > div:nth-child(5) { animation-delay: 1.4s; }
-.process-steps > div:nth-child(6) { animation-delay: 1.7s; }
+.process-steps > div:nth-child(3) { animation-delay: 0.5s; }
+.process-steps > div:nth-child(5) { animation-delay: 0.8s; }
 
 @keyframes slideInStep {
   0% {
@@ -542,37 +489,15 @@ Brave Search, Fetch, Time
 
 <div class="process-steps">
 
-<div>1. 🔵 Brukeren skriver inn en prompt</div>
-
-<div>2. 🧠 Klienten analyserer tilgjengelige tools og bestemmer hva som brukes</div>
-
-<div>3. ⚡  Klienten utfører valgte tools gjennom MCP-serveren</div>
-
-<div>4. 📤 Resultatene sendes tilbake til Klienten</div>
-
-<div>5. 💬 Klienten lager et passende svar</div>
-
-<div>6. ✨ Svaret vises til brukeren</div>
-
-</div>
-
----
-
-# **Demo: JavaZone MCP Server**
-
-<div style="display: flex; flex-direction: column; align-items: center;">
+<div>📊 <strong>Finne generell informasjon om konferansen</strong></div>
 
 <br>
 
-📊 **Finne generell informasjon om konferansen**
+<div>🔍 <strong>Søke etter detaljer om presentasjonen for en foredragsholder</strong></div>
 
 <br>
 
-🔍 **Søke etter detaljer om presentasjonen for en foredragsholder**
-
-<br>
-
-💻 **IntelliJ som MCP server (fra versjon 2025.2)**
+<div>💻 <strong>IntelliJ som MCP server (fra versjon 2025.2)</strong></div>
 
 </div>
 
@@ -591,10 +516,6 @@ Brave Search, Fetch, Time
 </div>
 
 </div>
-
----
-
-# Demo oppsummering 🎯
 
 ---
 

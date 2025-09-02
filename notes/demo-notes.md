@@ -25,20 +25,20 @@ fun conferenceTool(service: ConferenceService) =
     MethodToolCallbackProvider.builder().toolObjects(service).build()
 ```
 
-7. konfigurer claude config til å laste inn mcp serveren
-8. kjør ./restart_claude.sh for å laste inn serveren
-9. Kjør en prompt for å teste 
-get general information and a summary of the JavaZone 2025 conference
-
-10. utvid mcp serveren med å legge til getSessionDetails, hvor man kan sende inn speaker
+7. utvid mcp serveren med å legge til getSessionDetails, hvor man kan sende inn speaker
 ```
 @Tool(description = "Get the session details for a speaker at the JavZone 2025 conference")
 fun getSessionDetails(speaker: String) =
     sessions().filter { it.hasSpeaker(speaker) }
 ```
+8. kjør `gradle build` for å bygge jar filen
 
-11. Bygg på nytt, og test en ny prompt som henter session details for Jarle Hansen
-get session details for the speaker Jarle Hansen at the 2025 javazone conference
+9. konfigurer claude config til å laste inn mcp serveren
+10. kjør ./restart_claude.sh for å laste inn serveren
+11. Kjør en prompt for å teste conference summary
+get general information and a summary of the javazone 2025 conference
+12. Kjør en prompt for å teste session details
+get the session details for the speaker Jarle Hansen at the javazone 2025 conference
 
-12. Vis intellij MCP server, be den om å liste ut antallet kotlin filer i prosjektet og hva de heter.
-get the number of kotlin files and list the file name in the current project in intellij
+13. Vis intellij MCP server, be den om å liste ut antallet kotlin filer i prosjektet og hva de heter.
+get the number of kotlin files and list the file names in the current intellij project

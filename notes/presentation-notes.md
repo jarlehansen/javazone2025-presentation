@@ -5,20 +5,17 @@
 
 1. Problem og løsning
 Vi skal starte med å se på hvilket problem MCP skal løse
-Og se på hvilken løsning det kommer med.
-Vi skal også gå litt inn på verdien dette gir
 
 2. Teknik oversikt
 Vi skal ha en kort gjennomgang av hvordan den tekniske løsningen er
 Skal se på detaljer rundt transport og protokoll
-Og litt detaljer i hvordan teknologien fungerer under panseret
 
 3. Praktisk demo
 Også skal vi se på kanskje det mest interessante her, vi skal ha en praktisk demo som viser hvordan vi kan implementere vår egen MCP server.
 Vi skal også prøve å ta i bruk en annen standard MCP server
 
 4. Alternativer
-Vi skal se på noen alternativer, hvilke andre muligheter man har av forskjellige språk og rammeverk for MCP
+Vi skal se på noen alternativer, hvilke andre muligheter man har for bruk av forskjellige språk og rammeverk for MCP
 
 5. Avslutning
 Også helt til slutt se litt på best practices ved implementering av MCP og en oppsummering
@@ -53,25 +50,12 @@ Hvis vi går videre til hvordan MCP fungerer teknisk, så skal vi starte med å 
 Man har 2 hoved-metoder, det ene er å kjøre som standard input-output, det andre er med å bruke HTTP
 Begge to bruker JSON RPS formatet på meldingene.
 
-# JSON-RPC meldingseksempel
-Metoden get_weather som kalles, med lokasjon som input
-Responsen inneholder været på det stedet
-
 
 # Livssyklus
 Livssyklusen beskriver hvordan klienten og serveren snakker sammen
 Den fungerer med at man starter med Initialization
 Så er det en discovery fase hvor serveren viser hva den tilbyr
 Og det siste er at kall sendes fra klienten til serveren når brukeren har bedt om relevant informasjon
-
-
-# Hva skjer under panseret
-Brukeren skriver inn en prompt i klienten, feks Claude Desktop.
-Claude analyserer tilgjengelig tools og bestemmer hva som brukes
-Klienten vil så kjøre den funksjonen som passer
-Og resultatet sendes tilbake til klienten
-Klienten lager et passende svar, med den konteksten den nå har tilgjengelig
-Også vil svaret vises til brukeren
 
 Det er flyten for en klient -> server i MCP.
 Vi skal nå hoppe over på en kjapp demo av dette.
@@ -87,13 +71,6 @@ I tillegg skal vi ta en rask titt på hvordan vi kan koble oss til en standard M
 
 # Josh Long
 Vi skal følge rådet til Josh Long, og starte med å gå til start.spring.io
-
-
-# Demo oppsummering
-- Vist et eksempel med Kotlin og Spring AI
-- Hvor enkelt det er å komme i gang
-
-Den implementasjonen viser bare et alternativ, men det finnes mange andre.
 
 
 # Andre alternativer for MCP servere
