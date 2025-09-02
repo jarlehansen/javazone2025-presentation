@@ -26,7 +26,7 @@ Også helt til slutt se litt på best practices ved implementering av MCP og en 
 
 # Hva er Model Context Protocol
 - Det er en åpen protokoll.
-- Anthoripic er firmaet som har utviklet Claude.
+- Anthropic er firmaet som har utviklet Claude.
 - Problemet det prøver å løse er at AI verktøyene lever i isolasjon uten tilgang til dine data og systemer.
 - Så det MCP tilbyr er jo nettopp en standardisert måte for AI-verktøyene å kommunisere med eksterne datakilder
 
@@ -35,12 +35,6 @@ Også helt til slutt se litt på best practices ved implementering av MCP og en 
 På den offisielle MCP websiden så sammenligner de teknologien med usb-c.
 Altså at man har ryddet opp i det rotet det var med mange ulike usb kabler, med å tilby en fast standard, som er usb-c
 På sammen måte prøver MCP å gjøre integrasjonen mellom ai-verktøy og ekstern data på en standard måte, som ikke er knyttet til en spesifikk implementasjon
-
-
-# Model Context Protocol
-Tenk på dette som en felles standard som de ulike verktøyene støtter
-Her har vi feks Claude og Gemini som støtter MCP, som igjen gjør det mulig å koble til feks en intern database for å kunne bruke dataene der til å berike konteksten og få enda mer nytte av ai
-Så hele poenget her er at MCP ikke er knyttet til en viss modell eller verktøy
 
 
 # MCP support status

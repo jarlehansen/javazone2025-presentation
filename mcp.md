@@ -266,28 +266,6 @@ style: |
 
 ![](images/usb-c.jpeg)
 
----
-
-
-# **Model Context Protocol** 🎉
-
-<div style="font-size: 24px;">
-
-```
-     AI Modeller          MCP           Datakilder
-   
-   Claude ──┐                    ┌──── Database
-            │                    │
-   GPT-4 ───┼──── [MCP Hub] ─────┼──── API-er
-            │                    │
-   Gemini ──┼                    ├──── Filer
-            │                    │
-   Llama ───┘                    └──── Slack
-```
-
-</div>
-
-## **= Én standard protokoll!**
 
 ---
 
