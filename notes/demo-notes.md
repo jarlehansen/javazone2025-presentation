@@ -8,7 +8,7 @@ package-name: com.example.javazone
 4. implementer sessions() som henter ut alle JavaZone sessions med RestClient
 5. implementer getConferenceSummary. Denne skal hente ut antall sessions og antall rom på JavaZone
 ```
-@Tool(description = "Get the conference summary for the 2025 JavaZone conference")
+@Tool(description = "Get the conference summary for JavaZone 2025")
 fun getConferenceSummary(): Map<String, Int> {
     val sessions = sessions()
     return mapOf(
@@ -36,9 +36,9 @@ fun getSessionDetails(speaker: String) =
 9. konfigurer claude config til å laste inn mcp serveren
 10. kjør ./restart_claude.sh for å laste inn serveren
 11. Kjør en prompt for å teste conference summary
-get general information and a summary of the javazone 2025 conference
+get a summary of the javazone 2025 conference
 12. Kjør en prompt for å teste session details
 get the session details for the speaker Jarle Hansen at the javazone 2025 conference
 
 13. Vis intellij MCP server, be den om å liste ut antallet kotlin filer i prosjektet og hva de heter.
-get the number of kotlin files and list the file names in the current intellij project
+list the kotlin file names in the current intellij project
