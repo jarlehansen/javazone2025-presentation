@@ -351,20 +351,6 @@ style: |
 
 ![](images/usb-c.jpeg)
 
-
----
-
-# **MCP Support Status** 🚀
-
-- 🤖 **Claude** (Anthropic)
-- 🔷 **Copilot** (Microsoft)
-- 💬 **ChatGPT** (OpenAI)
-- 🌈 **Gemini** (Google)
-
-<br>
-
-#### **🎯 MCP er på vei til å bli universell standard**  
-
 ---
 
 # **Offisielle MCP-servere**
