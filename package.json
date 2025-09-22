@@ -5,13 +5,15 @@
   "author": "Jarle Hansen",
   "scripts": {
     "dev": "marp --watch mcp.md -o presentation.html",
-    "dev:extended": "marp --watch mcp-extended.md -o extended-presentation.html",
+    "dev:extended": "marp --html --watch mcp-extended.md -o extended-presentation.html & npm run registry-browser",
     "start": "marp mcp.md -o presentation.html",
-    "start:extended": "marp mcp.md -o extended-presentation.html",
+    "start:extended": "marp --html mcp-extended.md -o extended-presentation.html && npm run registry-browser",
     "present": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/presentation.html https://start.spring.io",
-    "present:extended": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/extended-presentation.html https://start.spring.io"
+    "present:extended": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/extended-presentation.html https://start.spring.io",
+    "registry-browser": "serve . -p 8080"
   },
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.2.3"
+    "@marp-team/marp-cli": "^4.2.3",
+    "serve": "^14.2.1"
   }
 }

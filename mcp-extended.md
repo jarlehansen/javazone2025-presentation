@@ -448,6 +448,17 @@ Brave Search, Fetch, Time
 
 ---
 
+# **🏪 MCP Registry**
+
+![](images/mcp-registry.jpg)
+
+##### **🔗 [mcp-registry.com](https://mcp-registry.com)**
+
+---
+
+<iframe src="http://localhost:8080/mcp-registry.html" width="100%" height="600" style="border: none;"></iframe>
+
+---
 
 # **Transport Layer** 🚚
 

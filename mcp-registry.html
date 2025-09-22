@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Registry Browser</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        :root {
+            --pico-primary-background: #00d4ff;
+            --pico-primary-border: #00d4ff;
+            --pico-primary-color: #000;
+        }
+
+        .server-card {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--pico-border-color);
+            border-radius: var(--pico-border-radius);
+            background: var(--pico-card-background-color);
+        }
+
+        .server-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--pico-primary-background);
+        }
+
+        .server-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .server-meta span {
+            font-size: 0.9rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            background: var(--pico-secondary-background);
+        }
+
+        .search-section {
+            margin-bottom: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error {
+            color: var(--pico-del-color);
+            padding: 1rem;
+            border: 1px solid var(--pico-del-color);
+            border-radius: var(--pico-border-radius);
+            margin-bottom: 1rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .server-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .server-actions button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .modal-content {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        pre {
+            background: var(--pico-code-background-color);
+            padding: 1rem;
+            border-radius: var(--pico-border-radius);
+            overflow-x: auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+            background: var(--pico-card-background-color);
+            border-radius: var(--pico-border-radius);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--pico-primary-background);
+        }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <ul>
+            <li><strong>🏪 MCP Registry Browser</strong></li>
+        </ul>
+        <ul>
+            <li><a href="https://github.com/modelcontextprotocol/registry" target="_blank">GitHub</a></li>
+            <li><a href="https://modelcontextprotocol.io" target="_blank">Docs</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="search-section">
+            <div class="grid">
+                <input type="search" id="searchInput" placeholder="Search servers..." aria-label="Search servers">
+                <select id="sortSelect" aria-label="Sort by">
+                    <option value="name" selected>Sort by Name</option>
+                    <option value="version">Sort by Version</option>
+                    <option value="status">Sort by Status</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="stats" id="statsSection">
+            <div class="stat-card">
+                <div class="stat-number" id="totalServers">-</div>
+                <div>Total Servers</div>
+            </div>
+        </section>
+
+        <section id="errorSection" class="error" style="display: none;"></section>
+
+        <section id="loadingSection" class="loading" style="display: none;">
+            <progress id="loadingProgress"></progress>
+            <p id="loadingText">Loading servers...</p>
+        </section>
+
+        <section id="serversSection"></section>
+
+    </main>
+
+    <!-- Modal for server details -->
+    <dialog id="serverModal">
+        <article>
+            <header>
+                <h3 id="modalTitle">Server Details</h3>
+                <button rel="prev" id="closeModal" aria-label="Close"></button>
+            </header>
+            <div class="modal-content" id="modalContent">
+                <!-- Server details will be loaded here -->
+            </div>
+        </article>
+    </dialog>
+
+    <script>
+        class MCPRegistryBrowser {
+            constructor() {
+                // Use AllOrigins public proxy to avoid CORS issues
+                this.directUrl = 'https://registry.modelcontextprotocol.io/v0';
+                this.servers = [];
+                this.filteredServers = [];
+                this.totalCount = 0;
+
+                this.initializeElements();
+                this.bindEvents();
+                this.loadServers();
+            }
+
+            initializeElements() {
+                this.searchInput = document.getElementById('searchInput');
+                this.sortSelect = document.getElementById('sortSelect');
+                this.serversSection = document.getElementById('serversSection');
+                this.loadingSection = document.getElementById('loadingSection');
+                this.loadingProgress = document.getElementById('loadingProgress');
+                this.loadingText = document.getElementById('loadingText');
+                this.errorSection = document.getElementById('errorSection');
+                this.serverModal = document.getElementById('serverModal');
+                this.modalTitle = document.getElementById('modalTitle');
+                this.modalContent = document.getElementById('modalContent');
+                this.closeModal = document.getElementById('closeModal');
+                this.totalServers = document.getElementById('totalServers');
+            }
+
+            bindEvents() {
+                this.searchInput.addEventListener('input', () => this.filterServers());
+                this.sortSelect.addEventListener('change', () => this.sortAndDisplayServers());
+                this.closeModal.addEventListener('click', () => this.serverModal.close());
+
+                // Close modal when clicking outside
+                this.serverModal.addEventListener('click', (e) => {
+                    if (e.target === this.serverModal) {
+                        this.serverModal.close();
+                    }
+                });
+            }
+
+            async loadServers() {
+                this.showLoading();
+                this.hideError();
+
+                try {
+                    await this.loadAllServers();
+                    this.updateStats();
+                    this.filterServers();
+
+                } catch (error) {
+                    this.showError(`Failed to load servers: ${error.message}. This might be due to CORS restrictions or the registry being unavailable.`);
+                    console.error('Error loading servers:', error);
+                } finally {
+                    this.hideLoading();
+                }
+            }
+
+            async loadAllServers() {
+                this.servers = [];
+                let cursor = null;
+                let totalFetched = 0;
+                let pageCount = 0;
+                let retryCount = 0;
+                const maxRetries = 5;
+
+                do {
+                    pageCount++;
+                    console.log(`Fetching page ${pageCount}... ${cursor ? `cursor: ${cursor.substring(0, 20)}...` : 'first page'}`);
+
+                    // Update progress text
+                    this.loadingText.textContent = `Loading servers... (Page ${pageCount}, ${totalFetched} servers loaded)`;
+
+                    const urlParams = cursor ? `?cursor=${encodeURIComponent(cursor)}` : '';
+                    const targetUrl = `${this.directUrl}/servers${urlParams}`;
+
+                    let data = null;
+                    let success = false;
+                    let currentRetry = 0;
+
+                    // Retry logic for each page
+                    while (!success && currentRetry <= maxRetries) {
+                        try {
+                            if (currentRetry > 0) {
+                                console.log(`Retry attempt ${currentRetry} for page ${pageCount}`);
+                                this.loadingText.textContent = `Loading servers... (Page ${pageCount}, ${totalFetched} servers loaded) - Retry ${currentRetry}/${maxRetries}`;
+
+                                // Exponential backoff: wait longer between retries
+                                const waitTime = Math.min(1000 * Math.pow(2, currentRetry - 1), 5000);
+                                await new Promise(resolve => setTimeout(resolve, waitTime));
+                            }
+
+                            const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+                            const response = await fetch(url, {
+                                timeout: 30000, // 30 second timeout
+                                headers: {
+                                    'Accept': 'application/json',
+                                }
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                            }
+
+                            data = await response.json();
+                            success = true;
+                            retryCount = 0; // Reset retry count on success
+
+                        } catch (error) {
+                            currentRetry++;
+                            console.warn(`Page ${pageCount} attempt ${currentRetry} failed:`, error.message);
+
+                            if (currentRetry > maxRetries) {
+                                console.error(`Failed to load page ${pageCount} after ${maxRetries} retries`);
+                                throw new Error(`Failed to load page ${pageCount} after ${maxRetries} retries: ${error.message}`);
+                            }
+                        }
+                    }
+
+                    const pageServers = data.servers || [];
+
+                    if (pageServers.length === 0 && cursor) {
+                        console.warn(`Page ${pageCount} returned no servers but has cursor. This might indicate an issue.`);
+                    }
+
+                    this.servers = this.servers.concat(pageServers);
+                    totalFetched += pageServers.length;
+
+                    cursor = data.metadata?.next_cursor;
+                    this.totalCount = data.metadata?.count || this.servers.length;
+
+                    // Update progress bar if we know the total count
+                    if (this.totalCount > 0) {
+                        const progressPercent = (totalFetched / this.totalCount) * 100;
+                        this.loadingProgress.value = progressPercent;
+                        this.loadingProgress.max = 100;
+                    }
+
+                    console.log(`✅ Page ${pageCount}: Fetched ${pageServers.length} servers (total: ${totalFetched}/${this.totalCount})`);
+
+
+                    // Add a delay to be respectful to the API and proxy service
+                    if (cursor) {
+                        await new Promise(resolve => setTimeout(resolve, 200)); // Increased delay
+                    }
+
+                } while (cursor);
+
+                console.log(`🎉 Finished loading all servers. Total: ${this.servers.length} servers from ${pageCount} pages`);
+                this.loadingText.textContent = `✅ Loaded ${this.servers.length} servers successfully!`;
+            }
+
+            updateStats() {
+                this.totalServers.textContent = this.servers.length;
+            }
+
+            filterServers() {
+                const searchTerm = this.searchInput.value.toLowerCase();
+                this.filteredServers = this.servers.filter(server =>
+                    server.name.toLowerCase().includes(searchTerm) ||
+                    (server.description && server.description.toLowerCase().includes(searchTerm))
+                );
+                this.sortAndDisplayServers();
+            }
+
+            sortAndDisplayServers() {
+                const sortBy = this.sortSelect.value;
+
+                this.filteredServers.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'version':
+                            return (b.version || '').localeCompare(a.version || '');
+                        case 'status':
+                            return (a.status || '').localeCompare(b.status || '');
+                        default:
+                            return 0;
+                    }
+                });
+
+                this.displayServers();
+            }
+
+            displayServers() {
+                if (this.filteredServers.length === 0) {
+                    this.serversSection.innerHTML = `
+                        <article>
+                            <p>No servers found matching your criteria.</p>
+                        </article>
+                    `;
+                    this.paginationSection.style.display = 'none';
+                    return;
+                }
+
+                // Display all servers on one page (no pagination)
+                this.serversSection.innerHTML = this.filteredServers.map(server => this.createServerCard(server)).join('');
+
+            }
+
+            createServerCard(server) {
+                const statusColor = server.status === 'active' ? 'success' :
+                                  server.status === 'deprecated' ? 'warning' : 'secondary';
+
+                return `
+                    <div class="server-card">
+                        <h3>${this.escapeHtml(server.name)}</h3>
+                        <p>${this.escapeHtml(server.description || 'No description available')}</p>
+                        <div class="server-meta">
+                            <span class="${statusColor}">Status: ${server.status || 'Unknown'}</span>
+                            <span>Version: ${server.version || 'N/A'}</span>
+                            ${server.license ? `<span>License: ${server.license}</span>` : ''}
+                        </div>
+                        <div class="server-actions">
+                            <button onclick="mcpBrowser.showServerInfo('${server.name}')" class="outline">
+                                📋 Details
+                            </button>
+                            <button onclick="mcpBrowser.showServerVersionInfo('${server.name}')" class="outline">
+                                📦 Versions
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            showServerInfo(serverName) {
+                const server = this.servers.find(s => s.name === serverName);
+                if (!server) {
+                    this.modalContent.innerHTML = '<div class="error">Server not found</div>';
+                    return;
+                }
+
+                this.modalTitle.textContent = `Server: ${server.name}`;
+                this.modalContent.innerHTML = `
+                    <h4>Server Information</h4>
+                    <dl>
+                        <dt>Name</dt>
+                        <dd>${this.escapeHtml(server.name)}</dd>
+                        <dt>Description</dt>
+                        <dd>${this.escapeHtml(server.description || 'N/A')}</dd>
+                        <dt>Version</dt>
+                        <dd>${this.escapeHtml(server.version || 'N/A')}</dd>
+                        <dt>Status</dt>
+                        <dd>${this.escapeHtml(server.status || 'N/A')}</dd>
+                        ${server.license ? `<dt>License</dt><dd>${this.escapeHtml(server.license)}</dd>` : ''}
+                        ${server.author ? `<dt>Author</dt><dd>${this.escapeHtml(server.author)}</dd>` : ''}
+                        ${server.homepage ? `<dt>Homepage</dt><dd><a href="${server.homepage}" target="_blank">${this.escapeHtml(server.homepage)}</a></dd>` : ''}
+                        ${server.keywords ? `<dt>Keywords</dt><dd>${server.keywords.map(k => `<span style="background: var(--pico-secondary-background); padding: 0.2em 0.5em; border-radius: 3px; margin-right: 0.5em;">${this.escapeHtml(k)}</span>`).join('')}</dd>` : ''}
+                        ${server.category ? `<dt>Category</dt><dd>${this.escapeHtml(server.category)}</dd>` : ''}
+                        ${server.language ? `<dt>Language</dt><dd>${this.escapeHtml(server.language)}</dd>` : ''}
+                        ${server.created_at ? `<dt>Created</dt><dd>${new Date(server.created_at).toLocaleDateString()}</dd>` : ''}
+                        ${server.updated_at ? `<dt>Updated</dt><dd>${new Date(server.updated_at).toLocaleDateString()}</dd>` : ''}
+                        ${server.downloads ? `<dt>Downloads</dt><dd>${server.downloads.toLocaleString()}</dd>` : ''}
+                        ${server.stars ? `<dt>Stars</dt><dd>${server.stars}</dd>` : ''}
+                        ${server.forks ? `<dt>Forks</dt><dd>${server.forks}</dd>` : ''}
+                    </dl>
+                    <h4>Raw JSON</h4>
+                    <pre><code>${this.escapeHtml(JSON.stringify(server, null, 2))}</code></pre>
+                `;
+                this.serverModal.showModal();
+            }
+
+            showServerVersionInfo(serverName) {
+                const server = this.servers.find(s => s.name === serverName);
+                if (!server) {
+                    this.modalContent.innerHTML = '<div class="error">Server not found</div>';
+                    return;
+                }
+
+                this.modalTitle.textContent = `Versions: ${server.name}`;
+                this.modalContent.innerHTML = `
+                    <h4>Version Information</h4>
+                    <dl>
+                        <dt>Current Version</dt>
+                        <dd>${this.escapeHtml(server.version || 'N/A')}</dd>
+                        <dt>Server Name</dt>
+                        <dd>${this.escapeHtml(server.name)}</dd>
+                        ${server.license ? `<dt>License</dt><dd>${this.escapeHtml(server.license)}</dd>` : ''}
+                    </dl>
+                `;
+                this.serverModal.showModal();
+            }
+
+            async showServerDetails(serverId) {
+                try {
+                    this.modalTitle.textContent = `Server: ${serverId}`;
+                    this.modalContent.innerHTML = '<progress></progress>';
+                    this.serverModal.showModal();
+
+                    const targetUrl = `${this.directUrl}/servers/${encodeURIComponent(serverId)}`;
+                    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const server = await response.json();
+
+                    this.modalContent.innerHTML = `
+                        <h4>Server Information</h4>
+                        <dl>
+                            <dt>Name</dt>
+                            <dd>${this.escapeHtml(server.name)}</dd>
+                            <dt>Description</dt>
+                            <dd>${this.escapeHtml(server.description || 'N/A')}</dd>
+                            <dt>Version</dt>
+                            <dd>${this.escapeHtml(server.version || 'N/A')}</dd>
+                            <dt>Status</dt>
+                            <dd>${this.escapeHtml(server.status || 'N/A')}</dd>
+                            ${server.license ? `<dt>License</dt><dd>${this.escapeHtml(server.license)}</dd>` : ''}
+                            ${server.repository ? `<dt>Repository</dt><dd><a href="${server.repository}" target="_blank">${this.escapeHtml(server.repository)}</a></dd>` : ''}
+                        </dl>
+
+                        ${server.installation ? `
+                            <h4>Installation</h4>
+                            <pre><code>${this.escapeHtml(JSON.stringify(server.installation, null, 2))}</code></pre>
+                        ` : ''}
+
+                        ${server.tools && server.tools.length > 0 ? `
+                            <h4>Available Tools</h4>
+                            <ul>
+                                ${server.tools.map(tool => `<li><strong>${this.escapeHtml(tool.name || 'Unknown')}</strong>: ${this.escapeHtml(tool.description || 'No description')}</li>`).join('')}
+                            </ul>
+                        ` : ''}
+
+                        <h4>Raw JSON</h4>
+                        <pre><code>${this.escapeHtml(JSON.stringify(server, null, 2))}</code></pre>
+                    `;
+
+                } catch (error) {
+                    let errorMessage = error.message;
+                    if (error.message.includes('invalid UUID length')) {
+                        errorMessage = `Unable to load server details. The API expects a UUID but received "${serverId}". This might be a limitation of the current API implementation.`;
+                    }
+                    this.modalContent.innerHTML = `
+                        <div class="error">
+                            Failed to load server details: ${this.escapeHtml(errorMessage)}
+                        </div>
+                    `;
+                }
+            }
+
+            async showServerVersions(serverId) {
+                try {
+                    this.modalTitle.textContent = `Versions: ${serverId}`;
+                    this.modalContent.innerHTML = '<progress></progress>';
+                    this.serverModal.showModal();
+
+                    const targetUrl = `${this.directUrl}/servers/${encodeURIComponent(serverId)}/versions`;
+                    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    const versions = data.versions || [];
+
+                    if (versions.length === 0) {
+                        this.modalContent.innerHTML = '<p>No versions found for this server.</p>';
+                        return;
+                    }
+
+                    this.modalContent.innerHTML = `
+                        <h4>Available Versions</h4>
+                        <div>
+                            ${versions.map(version => `
+                                <div class="server-card">
+                                    <h5>Version ${this.escapeHtml(version.version || 'Unknown')}</h5>
+                                    <p><strong>Published:</strong> ${version.published_at ? new Date(version.published_at).toLocaleDateString() : 'N/A'}</p>
+                                    ${version.changelog ? `<p><strong>Changelog:</strong> ${this.escapeHtml(version.changelog)}</p>` : ''}
+                                    <button onclick="mcpBrowser.showSpecificVersion('${serverId}', '${version.version}')" class="outline">
+                                        View Details
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                } catch (error) {
+                    this.modalContent.innerHTML = `
+                        <div class="error">
+                            Failed to load versions: ${this.escapeHtml(error.message)}
+                        </div>
+                    `;
+                }
+            }
+
+            async showSpecificVersion(serverId, version) {
+                try {
+                    this.modalContent.innerHTML = '<progress></progress>';
+
+                    const targetUrl = `${this.directUrl}/servers/${encodeURIComponent(serverId)}?version=${encodeURIComponent(version)}`;
+                    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const server = await response.json();
+
+                    this.modalContent.innerHTML = `
+                        <h4>Version ${this.escapeHtml(version)} Details</h4>
+                        <pre><code>${this.escapeHtml(JSON.stringify(server, null, 2))}</code></pre>
+                    `;
+
+                } catch (error) {
+                    this.modalContent.innerHTML = `
+                        <div class="error">
+                            Failed to load version details: ${this.escapeHtml(error.message)}
+                        </div>
+                    `;
+                }
+            }
+
+
+            showLoading() {
+                this.loadingSection.style.display = 'block';
+                this.serversSection.style.display = 'none';
+            }
+
+            hideLoading() {
+                this.loadingSection.style.display = 'none';
+                this.serversSection.style.display = 'block';
+            }
+
+            showError(message) {
+                this.errorSection.style.display = 'block';
+                this.errorSection.textContent = message;
+            }
+
+            hideError() {
+                this.errorSection.style.display = 'none';
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the application
+        let mcpBrowser;
+        document.addEventListener('DOMContentLoaded', () => {
+            mcpBrowser = new MCPRegistryBrowser();
+        });
+    </script>
+</body>
+</html>
