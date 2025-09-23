@@ -137,14 +137,14 @@
             </div>
         </section>
 
-        <section id="errorSection" class="error" style="display: none;"></section>
-
         <section id="loadingSection" class="loading" style="display: none;">
             <progress id="loadingProgress"></progress>
             <p id="loadingText">Loading servers...</p>
         </section>
 
         <section id="serversSection"></section>
+
+        <section id="errorSection" class="error" style="display: none;"></section>
 
     </main>
 
@@ -213,7 +213,14 @@
                     this.filterServers();
 
                 } catch (error) {
-                    this.showError(`Failed to load servers: ${error.message}. This might be due to CORS restrictions or the registry being unavailable.`);
+                    // If we have some servers loaded, still show them
+                    if (this.servers.length > 0) {
+                        this.updateStats();
+                        this.filterServers();
+                        this.showError(`Partial data loaded: ${error.message}. Showing ${this.servers.length} servers that were successfully retrieved.`);
+                    } else {
+                        this.showError(`Failed to load servers: ${error.message}. This might be due to CORS restrictions or the registry being unavailable.`);
+                    }
                     console.error('Error loading servers:', error);
                 } finally {
                     this.hideLoading();
@@ -250,7 +257,7 @@
                                 this.loadingText.textContent = `Loading servers... (Page ${pageCount}, ${totalFetched} servers loaded) - Retry ${currentRetry}/${maxRetries}`;
 
                                 // Exponential backoff: wait longer between retries
-                                const waitTime = Math.min(1000 * Math.pow(2, currentRetry - 1), 5000);
+                                const waitTime = Math.min(2000 * Math.pow(2, currentRetry - 1), 15000);
                                 await new Promise(resolve => setTimeout(resolve, waitTime));
                             }
 
@@ -276,7 +283,9 @@
 
                             if (currentRetry > maxRetries) {
                                 console.error(`Failed to load page ${pageCount} after ${maxRetries} retries`);
-                                throw new Error(`Failed to load page ${pageCount} after ${maxRetries} retries: ${error.message}`);
+                                // Instead of throwing, we'll break out and return what we have
+                                console.log(`Stopping at page ${pageCount}. Returning ${this.servers.length} servers collected so far.`);
+                                return; // Exit the loadAllServers method with partial data
                             }
                         }
                     }
@@ -305,7 +314,7 @@
 
                     // Add a delay to be respectful to the API and proxy service
                     if (cursor) {
-                        await new Promise(resolve => setTimeout(resolve, 200)); // Increased delay
+                        await new Promise(resolve => setTimeout(resolve, 1000)); // Increased delay between pages
                     }
 
                 } while (cursor);
