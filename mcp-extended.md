@@ -448,17 +448,6 @@ Brave Search, Fetch, Time
 
 ---
 
-# **🏪 MCP Registry**
-
-![](images/mcp-registry.jpg)
-
-##### **🔗 [mcp-registry.com](https://mcp-registry.com)**
-
----
-
-<iframe src="http://localhost:8080/mcp-registry.html" width="100%" height="600" style="border: none;"></iframe>
-
----
 
 # **Transport Layer** 🚚
 
@@ -656,6 +645,40 @@ var app = builder.Build();
 
 </div>
 </div>
+
+---
+
+<!-- _footer: '' -->
+
+# **🏪 MCP Registry**
+
+![width:80%](images/mcp-registry.jpg)
+
+##### **🔗 [https://registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)**
+
+---
+
+# **MCP Registry Preview** 🚀
+
+<br>
+
+- **🌐 Centralized source of truth** for MCP ecosystem discovery
+
+<br>
+
+- **📦 Open catalog and API** for publicly available MCP servers
+
+<br>
+
+- **🤝 Community-driven** with 16+ contributors from 9+ companies
+
+<br>
+
+- **🔧 Flexible registry options** supporting public and private sub-registries
+
+---
+
+<iframe src="http://localhost:8080/mcp-registry.html" width="100%" height="600" style="border: none;"></iframe>
 
 ---
 
