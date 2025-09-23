@@ -650,7 +650,7 @@ var app = builder.Build();
 
 <!-- _footer: '' -->
 
-# **🏪 MCP Registry**
+# **🏪 MCP Registry (09/09-2025)**
 
 ![width:80%](images/mcp-registry.jpg)
 
