@@ -701,6 +701,26 @@ var app = builder.Build();
 
 ---
 
+# **MCP Server Sources** 📦
+
+<br>
+
+- **🛠️ [mcp-get](https://github.com/michaellatman/mcp-get)** - Package manager for MCP servers
+
+<br>
+
+- **🏪 [Official MCP Servers](https://github.com/modelcontextprotocol/servers)** - Anthropic's production-ready servers
+
+<br>
+
+- **🌐 [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)** - Community-curated list
+
+<br>
+
+- **📋 [MCP Registry](https://registry.modelcontextprotocol.io)** - Centralized discovery platform
+
+---
+
 # **Security**
 
 **Security best practices  🔒**
