@@ -9,8 +9,9 @@
     "start": "marp mcp.md -o presentation.html",
     "start:extended": "marp --html mcp-extended.md -o presentation-extended.html && npm run registry-browser",
     "present": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/presentation.html https://start.spring.io",
-    "present:extended": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/presentation-extended.html https://start.spring.io",
-    "registry-browser": "serve . -p 8080"
+    "present:extended": "open -n -a Vivaldi --args --new-window --start-fullscreen file://$(pwd)/presentation-extended.html https://start.spring.io && npm run registry-browser & npm run mcp-inspector",
+    "registry-browser": "serve . -p 8888",
+    "mcp-inspector": "npx @modelcontextprotocol/inspector"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.2.3",

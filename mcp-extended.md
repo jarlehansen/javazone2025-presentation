@@ -571,6 +571,25 @@ Brave Search, Fetch, Time
 
 ---
 
+# **🔍 MCP Inspector**
+
+### **Developer Tool for Testing & Debugging**
+
+🔗 Test MCP server connectivity
+
+🔍 Inspect resources, prompts, and tools
+
+📋 View server logs and notifications
+
+<br>
+
+```bash
+npx @modelcontextprotocol/inspector
+```
+
+---
+
+
 # **Other Alternatives for MCP Servers**
 
 <div class="columns">
@@ -678,7 +697,7 @@ var app = builder.Build();
 
 ---
 
-<iframe src="http://localhost:8080/mcp-registry.html" width="100%" height="600" style="border: none;"></iframe>
+<iframe src="http://localhost:8888/mcp-registry.html" width="100%" height="600" style="border: none;"></iframe>
 
 ---
 
