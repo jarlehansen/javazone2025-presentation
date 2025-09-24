@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Quit Claude Desktop application
 osascript -e 'quit app "Claude"'

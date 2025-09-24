@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Unzip the file from Downloads folder
 unzip ~/Downloads/javazone-mcp.zip -d ~/Downloads/

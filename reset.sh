@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Reset script to remove javazone-mcp configuration and files
 
