@@ -729,9 +729,20 @@ var app = builder.Build();
 
 # **Security**
 
+
+
 **Security best practices  🔒**
 https://modelcontextprotocol.io/specification/latest
 
+<br>
+
+<div style="text-align: center;">
+ <i>🎯 Key principles</i>
+ <br>
+ <i>📋 Implementation guidelines</i>
+</div>
+
+<br>
 <br>
 
 **Only use MCP from trusted sources**
@@ -757,7 +768,6 @@ https://modelcontextprotocol.io/specification/latest
 <br>
 
 - 🔒 **Consider security**
-
 
 ---
 
