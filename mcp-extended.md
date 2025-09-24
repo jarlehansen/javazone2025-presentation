@@ -745,7 +745,7 @@ https://modelcontextprotocol.io/specification/latest
 <br>
 <br>
 
-**Only use MCP from trusted sources**
+**MCP servers can run arbitrary code on your machine. Only add servers from trusted sources, and review the publisher and server configuration before starting it.**
 
 ---
 
