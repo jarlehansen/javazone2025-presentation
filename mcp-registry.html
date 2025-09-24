@@ -86,31 +86,12 @@
             overflow-x: auto;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 1rem;
-            background: var(--pico-card-background-color);
-            border-radius: var(--pico-border-radius);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--pico-primary-background);
-        }
     </style>
 </head>
 <body>
     <nav class="container">
         <ul>
-            <li><strong>🏪 MCP Registry Browser</strong></li>
+            <li><strong>🏪 MCP Registry Browser - <span id="totalServers"></span> servers</strong></li>
         </ul>
         <ul>
             <li><a href="https://github.com/modelcontextprotocol/registry" target="_blank">GitHub</a></li>
@@ -130,12 +111,6 @@
             </div>
         </section>
 
-        <section class="stats" id="statsSection">
-            <div class="stat-card">
-                <div class="stat-number" id="totalServers">-</div>
-                <div>Total Servers</div>
-            </div>
-        </section>
 
         <section id="loadingSection" class="loading" style="display: none;">
             <progress id="loadingProgress"></progress>
