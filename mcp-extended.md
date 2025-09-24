@@ -707,6 +707,10 @@ var app = builder.Build();
 
 <br>
 
+- **💙 [VS Code Extension](https://code.visualstudio.com/mcp)** - Native MCP support built into your editor
+
+<br>
+
 - **🛠️ [mcp-get](https://github.com/michaellatman/mcp-get)** - Package manager for MCP servers
 
 <br>
