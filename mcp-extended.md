@@ -397,7 +397,9 @@ style: |
 
 4. 🌐 **Alternatives for MCP implementation**
 
-5. 🏁 **Wrap-up**
+5. 🏪 **MCP registry**
+
+6. 🏁 **Wrap-up**
 
 </div>
 
